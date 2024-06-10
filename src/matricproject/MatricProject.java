@@ -18,12 +18,16 @@ public class MatricProject {
      */
     public static void main(String[] args) {
         DataHandler dh = new DataHandler();
-        LocalDate date = LocalDate.of(2024, 11, 20);
-        Event e = new Event(4, "hockey", date, "wood", "jagger");
-       
-e.setOddsA(dh.calculatingOddsA(e));
-e.setOddsB(dh.calculatingOddsB(e));
-        System.out.println(e);
+        LocalDate date = LocalDate.of(2002, 01, 01);
+        LocalDate date1 = LocalDate.of(2021, 01, 01);
+        Event e = new Event(1, "hockey", date1, "Wood", "Gane");
+       User u = new User(1, "bob", "smith", "24bobs@kingswoodcollege.com", "bob123", 
+               true, date, 9, "wood", 100, false);
+//e.setOddsA(dh.calculatingOddsA(e));
+//e.setOddsB(dh.calculatingOddsB(e));
+//        System.out.println(dh.getAllEventsSportSpecified("hockey"));
+//dh.placeBetFinal(u, e, 10, "Wood");
+System.out.println(dh.searchUser("24bobs@kingswoodcollege.com", "bob123"));
 
                
 //        ArrayList<User> users = dh.getAllUsers();

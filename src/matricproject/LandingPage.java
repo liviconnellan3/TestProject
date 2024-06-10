@@ -63,7 +63,7 @@ public class LandingPage extends javax.swing.JFrame {
         });
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 80, -1));
 
-        pack();
+        setSize(new java.awt.Dimension(941, 563));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

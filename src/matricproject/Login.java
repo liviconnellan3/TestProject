@@ -4,6 +4,7 @@
  */
 package matricproject;
 
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -131,7 +132,11 @@ public class Login extends javax.swing.JFrame {
         if (dh.userPresent(txtEmail.getText(), txtPass.getText()) == false) {
             JOptionPane.showMessageDialog(Login.this, "User not found\nPlease create new account");
         } else{
-        MainUI m = new MainUI();
+            User cu = dh.searchUser(txtEmail.getText(), txtPass.getText());
+            CurrentUser.getInstance().setCurrentUser(cu);
+            
+           
+        MainPage m = new MainPage();
         m.setVisible(true);
         this.dispose();
         }

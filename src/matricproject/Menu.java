@@ -74,7 +74,6 @@ MenuItem menuStaff1 = new MenuItem(iconUser, "Staff001", null);
         panelBody = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(930, 550));
 
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
         panelMenu.setPreferredSize(new java.awt.Dimension(175, 555));

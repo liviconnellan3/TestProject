@@ -101,6 +101,10 @@ public class User {
         return isadmin;
     }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "User{" + "userid=" + userid + ", username=" + username + ", surname=" + surname + ", kcemail=" + kcemail + ", password=" + password + ", isfemale=" + isfemale + ", dob=" + dob + ", grade=" + grade + ", house=" + house + ", balance=" + balance + ", isadmin=" + isadmin + '}';

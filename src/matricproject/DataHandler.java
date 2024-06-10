@@ -70,6 +70,56 @@ public class DataHandler {
         return events;
     }
 
+    public ArrayList<Betslip> getBetslip() {
+        ArrayList<Betslip> bets = new ArrayList();
+        try {
+            String sql = "SELECT * FROM usersdb.tblbets;";
+            Connect conn = new Connect();
+
+            ResultSet rs = conn.query(sql); //like scanner
+            while (rs.next()) { //while scanner. has next line basically
+                int betid = Integer.parseInt(rs.getString("betid"));
+                int eventid = Integer.parseInt(rs.getString("eventid"));
+                int usertid = Integer.parseInt(rs.getString("userid"));
+                String chosenteam = rs.getString("chosenteam");
+                double amount = rs.getDouble("amount");
+                double returnamount = rs.getDouble("returnamount");
+                boolean won = rs.getBoolean("won");
+
+                Betslip b = new Betslip(betid, eventid, usertid, chosenteam, amount, returnamount, won);
+                bets.add(b);
+            }
+            conn.close(); //must close!!!
+        } catch (Exception e) {
+            System.err.println(e + "data handler class error!!!");
+        }
+        return bets;
+    }
+
+    public ArrayList<Event> getAllEventsSportSpecified(String inSport) {
+        ArrayList<Event> events = new ArrayList();
+        try {
+            String sql = "SELECT * FROM usersdb.tblevents WHERE sport = \"" + inSport + "\";"; //\" AND date = DATE(NOW())
+            Connect conn = new Connect();
+
+            ResultSet rs = conn.query(sql); //like scanner
+            while (rs.next()) { //while scanner. has next line basically
+                int eventid = Integer.parseInt(rs.getString("eventid"));
+                String sport = rs.getString("sport");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                String teamA = rs.getString("teamA");
+                String teamB = rs.getString("teamB");
+
+                Event e = new Event(eventid, sport, date, teamA, teamB);
+                events.add(e);
+            }
+            conn.close(); //must close!!!
+        } catch (Exception e) {
+            System.err.println(e + "data handler class error!!!");
+        }
+        return events;
+    }
+
     public ArrayList<HouseEvent> getAllHouseEvents() {
         ArrayList<HouseEvent> houseEvents = new ArrayList();
         try {
@@ -189,6 +239,50 @@ public class DataHandler {
         return oddsB;
     }
 
+    public double calculatingDraw(Event inE) {
+
+        double winsA = 0;
+        double lossesA = 0;
+        double drawsA = 0;
+
+        double winsB = 0;
+        double lossesB = 0;
+        double drawsB = 0;
+        try {
+            String sql = "SELECT wins, losses, draws FROM tblhouseevents WHERE house = \"" + inE.getTeamA() + "\" AND sport = \"" + inE.getSport() + "\";";
+            Connect conn = new Connect();
+
+            ResultSet rs = conn.query(sql);
+            while (rs.next()) {
+                winsA = rs.getDouble("wins");
+                lossesA = rs.getDouble("losses");
+                drawsA = rs.getDouble("draws");
+
+            }
+
+            String sql1 = "SELECT wins, losses, draws FROM tblhouseevents WHERE house = \"" + inE.getTeamB() + "\" AND sport = \"" + inE.getSport() + "\";";
+            Connect connn = new Connect();
+
+            ResultSet rss = connn.query(sql1);
+            while (rss.next()) {
+                winsB = rss.getDouble("wins");
+                lossesB = rss.getDouble("losses");
+                drawsB = rss.getDouble("draws");
+
+            }
+
+        } catch (Exception er) {
+            System.err.println(er);
+        }
+        double a = (drawsA / (winsA + lossesA + drawsA));
+        double b = (drawsB / (winsB + lossesB + drawsB));
+        double total = (a + b) / 2;
+        total = (total / (1 - total)) * 10;
+        total = Math.round(total * 10.0) / 10.0;
+
+        return total;
+    }
+
     public void setOdds(Event inE) {
 
         double winsA = 0;
@@ -233,10 +327,15 @@ public class DataHandler {
         double oddsB = 1 / (b / total);
         oddsB = Math.round(oddsB * 10.0) / 10.0;
 
+        double c = (drawsA / (winsA + lossesA + drawsA));
+        double d = (drawsB / (winsB + lossesB + drawsB));
+        double tt = ((c + d) / 2) * 10;
+        tt = Math.round(tt * 10.0) / 10.0;
+
         inE.setOddsA(oddsA);
         inE.setOddsB(oddsB);
+        inE.setOddsDraw(tt);
     }
-
 
 //vid 2 11:50 to get comments
     public int insertNewUser(User u) {
@@ -336,30 +435,100 @@ public class DataHandler {
         }
         return present;
     }
+    
+    public User searchUser(String inEmail, String inPass){
+        User u = null;
+         try {
+            String sql = "SELECT * FROM usersdb.tblusers WHERE kcemail = \""
+                    + inEmail + "\" AND  password = \"" + inPass + "\";";
+            Connect conn = new Connect();
 
-    public int addBalance(User u, double x) {
-        int numRows = 0;
+            ResultSet rs = conn.query(sql);
+
+             if (rs.next()) {
+                  int userid = Integer.parseInt(rs.getString("userid"));
+                String username = rs.getString("username");
+                String surname = rs.getString("surname");
+                String kcemail = rs.getString("kcemail");
+                String password = rs.getString("password");
+                boolean isfemale = rs.getBoolean("isfemale");
+                LocalDate dob = rs.getDate("dob").toLocalDate();
+                int grade = rs.getInt("grade");
+                String house = rs.getString("house");
+                double balance = rs.getDouble("balance");
+                boolean isadmin = rs.getBoolean("isadmin");
+
+                 u = new User(userid, username, surname, kcemail, password, isfemale, dob, grade, house, balance, isadmin);
+                
+             }
+               conn.equals(rs);
+            
+        } catch (SQLException e) {
+            System.err.println(e + "email user !!!!");
+        }
+           return u; 
+    }
+ 
+ public Event searchEvent(String inSport, String inTeamA, String inTeamB, LocalDate dd){
+        Event e = null;
+         try {
+            String sql = "SELECT * FROM usersdb.tblevent WHERE sport = \""
+                    + inSport + "\" AND  teamA = \"" + inTeamA + "\" AND teamB = \"" + inTeamB + "\" AND date = \"" + dd + "\";";
+            Connect conn = new Connect();
+
+            ResultSet rs = conn.query(sql);
+
+            while (rs.next()) { //while scanner. has next line basically
+                int eventid = Integer.parseInt(rs.getString("eventid"));
+                String sport = rs.getString("sport");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                String teamA = rs.getString("teamA");
+                String teamB = rs.getString("teamB");
+
+                e = new Event(eventid, sport, date, teamA, teamB);
+                
+            }
+               conn.equals(rs);
+            
+        } catch (SQLException er) {
+            System.err.println(er + "email user !!!!");
+        }
+           return e; 
+    }
+    public void addBalance(User u, double x) {
+        
         try {
             String sql = "UPDATE tblusers SET balance = balance + " + x + " WHERE userid = " + u.getUserid() + ";";
             Connect conn = new Connect();
-            numRows = conn.makeChange(sql);
+            conn.makeChange(sql);
         } catch (Exception e) {
             System.err.println(e + "udate balance!!");
         }
-        return numRows;
+        
     }
 
-    public int subtractBalance(User u, double x) {
-        int numRows = 0;
+    public void subtractBalance(User u, double x) {
+        
         try {
             String sql = "UPDATE tblusers SET balance = balance - " + x + " WHERE userid = " + u.getUserid() + ";";
             Connect conn = new Connect();
-            numRows = conn.makeChange(sql);
+             conn.makeChange(sql);
         } catch (Exception e) {
             System.err.println(e + "udate balance!!");
         }
-        return numRows;
+        
     }
+
+    public void placeBet(User u, Event e, double amount, String team) {
+        Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
+    }
+
+    public void placeBetFinal(User u, Event e, double amount, String team) {
+        Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
+        subtractBalance(u, amount);
+        
+    }
+    
 
     public int insertEvent(Event e) {
         int numRows = 0;
@@ -378,6 +547,5 @@ public class DataHandler {
         }
         return numRows;
     }
-
 
 }
