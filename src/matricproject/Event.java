@@ -102,7 +102,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" + "eventid=" + eventid + ", sport=" + sport + ", date=" + date + ", teamA=" + teamA + ", teamB=" + teamB + ", oddsA=" + oddsA + ", oddsB=" + oddsB + ", oddsDraw=" + oddsDraw + ", winner=" + winner + '}';
+        return "Event{" + "eventid=" + eventid + ", sport=" + sport + ", date=" + date + ", teamA=" + teamA + ", teamB=" + teamB + ", oddsA=" + oddsA + ", oddsB=" + oddsB + ", oddsDraw=" + oddsDraw + ", winner=" + winner + '}' + "\n";
     }
 
     

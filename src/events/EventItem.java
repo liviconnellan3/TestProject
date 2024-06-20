@@ -8,12 +8,12 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import matricproject.CurrentUser;
 import matricproject.DataHandler;
 import matricproject.Event;
 import matricproject.User;
-import static sun.jvm.hotspot.HelloWorld.e;
 
 /**
  *
@@ -44,8 +44,20 @@ public class EventItem extends javax.swing.JPanel {
     public EventItem(Event e) {
 
         initComponents();
+        
+ panelCheck.setVisible(true);
+        panelCheck.setEnabled(true);
+        
         DataHandler dh = new DataHandler();
-
+//        rbtn1.setText(e.getTeamA());
+//        rbtn2.setText(e.getTeamB());
+//
+//        txtAmount.setEnabled(true);
+//        txtAmount.setFocusable(true);
+//        rbtn1.setEnabled(true);
+//        rbtn1.setFocusable(true);
+//        rbtn2.setEnabled(true);
+//        rbtn2.setFocusable(true);
         lblTeams.setText(e.getTeamA() + " vs " + e.getTeamB());
         lblDate.setText(e.getDate() + "");
         lblTeamA.setText(e.getTeamA());
@@ -58,14 +70,21 @@ public class EventItem extends javax.swing.JPanel {
         lblSport.setText(e.getSport());
         lblDraw.setText(e.getOddsDraw() + "");
 
-        this.setSize(new Dimension(Integer.MAX_VALUE, 85));
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 85));
-        this.setMinimumSize(new Dimension(Integer.MAX_VALUE, 85));
-        panelCheck.setVisible(false);
+//        this.setSize(new Dimension(Integer.MAX_VALUE, 100));
+//        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
+//        this.setMinimumSize(new Dimension(Integer.MAX_VALUE, 100));
+//        panelCheck.setVisible(false);
 //        for (int i = 0; i < event.length; i++) {
 //            this.event.add(event[i]);
 //        }
+//panelCheck.setVisible(true);
+//panelCheck.setEnabled(true);
     }
+//     private void customizeComboBox(String item) {
+//        // Add custom items to the JComboBox
+//        jComboBox1.addItem(item);
+//        
+//    }
 //       public EventItem(String e,String u,  EventItem... event  ) {
 //           
 //        initComponents();
@@ -151,6 +170,8 @@ public class EventItem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         lblTeamA = new javax.swing.JLabel();
         lblOddsA = new javax.swing.JLabel();
@@ -166,12 +187,20 @@ public class EventItem extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblDraw = new javax.swing.JLabel();
         panelCheck = new javax.swing.JPanel();
-        lblBet = new javax.swing.JLabel();
         btnYes = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
-        txtDatee = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtAmount = new javax.swing.JTextField();
+        rbtn1 = new javax.swing.JRadioButton();
+        rbtn2 = new javax.swing.JRadioButton();
+        comboAmount = new javax.swing.JComboBox<>();
+        lblBet = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(925, 85));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -304,8 +333,12 @@ public class EventItem extends javax.swing.JPanel {
         );
 
         panelCheck.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        lblBet.setText("Visable");
+        panelCheck.setFocusCycleRoot(true);
+        panelCheck.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                panelCheckHierarchyChanged(evt);
+            }
+        });
 
         btnYes.setBackground(new java.awt.Color(153, 255, 153));
         btnYes.setText("Yes");
@@ -318,51 +351,82 @@ public class EventItem extends javax.swing.JPanel {
         btnNo.setBackground(new java.awt.Color(255, 102, 102));
         btnNo.setText("No");
 
-        txtDatee.setText("jTextField1");
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        txtAmount.setText("amount");
+        txtAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                txtAmountActionPerformed(evt);
             }
         });
+
+        rbtn1.setText("Team A");
+        rbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn1ActionPerformed(evt);
+            }
+        });
+
+        rbtn2.setText("Team B");
+        rbtn2.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                rbtn2HierarchyChanged(evt);
+            }
+        });
+        rbtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn2ActionPerformed(evt);
+            }
+        });
+
+        comboAmount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30", "40", "50" }));
 
         javax.swing.GroupLayout panelCheckLayout = new javax.swing.GroupLayout(panelCheck);
         panelCheck.setLayout(panelCheckLayout);
         panelCheckLayout.setHorizontalGroup(
             panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCheckLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(btnYes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNo)
-                .addGap(42, 42, 42))
+                .addGap(39, 39, 39))
             .addGroup(panelCheckLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCheckLayout.createSequentialGroup()
-                        .addComponent(txtDatee, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelCheckLayout.createSequentialGroup()
-                        .addComponent(lblBet)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCheckLayout.createSequentialGroup()
+                        .addComponent(rbtn1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))))
+                        .addComponent(rbtn2)
+                        .addGap(63, 63, 63))
+                    .addGroup(panelCheckLayout.createSequentialGroup()
+                        .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelCheckLayout.setVerticalGroup(
             panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCheckLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBet)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDatee, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtn1)
+                    .addComponent(rbtn2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCheckLayout.createSequentialGroup()
+                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCheckLayout.createSequentialGroup()
+                        .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
         );
+
+        lblBet.setText("jLabel2");
+
+        jTextField1.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -381,15 +445,23 @@ public class EventItem extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblSport, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(lblBet)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)))
                 .addComponent(panelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,71 +476,126 @@ public class EventItem extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                .addGap(18, 18, 18)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblBet)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 private boolean showing = false;
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        panelCheck.setVisible(false);
-        getParent().repaint();
-        getParent().revalidate();
+//        panelCheck.setVisible(false);
+//        panelCheck.setEnabled(true);
+//        rbtn1.setEnabled(true);
+//        rbtn1.setFocusable(true);
+//
+//        getParent().repaint();
+//        getParent().revalidate();
     }//GEN-LAST:event_formMousePressed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        lblBet.setText("Place bet on " + lblTeamA.getText());
-        panelCheck.setVisible(true);
-        getParent().repaint();
-        getParent().revalidate();
+//        panelCheck.setVisible(false);
+//        panelCheck.setEnabled(true);
+//        rbtn1.setEnabled(true);
+//        rbtn1.setFocusable(true);
+//        lblBet.setText("Place bet on " + lblTeamA.getText());
+//        panelCheck.setVisible(true);
+//        getParent().repaint();
+//        getParent().revalidate();
 
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-        lblBet.setText("Place bet on Draw");
-        panelCheck.setVisible(true);
-        getParent().repaint();
-        getParent().revalidate();
+//        panelCheck.setVisible(false);
+//        panelCheck.setEnabled(true);
+//        rbtn1.setEnabled(true);
+//        rbtn1.setFocusable(true);
+//        lblBet.setText("Place bet on Draw");
+//        panelCheck.setVisible(true);
+//        getParent().repaint();
+//        getParent().revalidate();
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        lblBet.setText("Place bet on " + lblTeamB.getText());
-        panelCheck.setVisible(true);
-        getParent().repaint();
-        getParent().revalidate();
+//        lblBet.setText("Place bet on " + lblTeamB.getText());
+//        panelCheck.setVisible(true);
+//        panelCheck.setVisible(false);
+//        panelCheck.setEnabled(true);
+//        rbtn1.setEnabled(true);
+//        rbtn1.setFocusable(true);
+//        getParent().repaint();
+//        getParent().revalidate();
     }//GEN-LAST:event_jPanel2MousePressed
 
-    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
-      DataHandler dh = new DataHandler();
-      String dateString = lblDate.getText(); // Format: yyyy-MM-dd
+    private void panelCheckHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_panelCheckHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelCheckHierarchyChanged
 
-        
+    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
+        DataHandler dh = new DataHandler();
+        String dateString = lblDate.getText(); // Format: yyyy-MM-dd
+        String teamSelected = "";
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        
         LocalDate date = LocalDate.parse(dateString, formatter);
-     Event e = dh.searchEvent(lblTeamA.getText(), lblTeamA.getText(), lblTeamB.getText(), date);
+        Event e = dh.searchEvent(lblTeamA.getText(), lblTeamA.getText(), lblTeamB.getText(), date);
         User cu = CurrentUser.getInstance().getCurrentUser(); //got code from chat gpt
+        if (rbtn1.isSelected()) {
+            teamSelected = rbtn1.getText();
+        }
+        if (rbtn2.isSelected()) {
+            teamSelected = rbtn2.getText();
+        }
         if (cu != null) {
-            dh.placeBetFinal(cu, e, Double.parseDouble(txtDatee.getText()),jComboBox1.getSelectedItem()+""
-                    );
+            dh.placeBetFinal(cu, e, Double.parseDouble(txtAmount.getText()), teamSelected + ""
+            );
         } else {
             JOptionPane.showMessageDialog(panelCheck, "not working");
         }
 
-//        DataHandler dh = new DataHandler();
-
     }//GEN-LAST:event_btnYesActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        jComboBox1.addItem(lblTeamA.getText());
-        jComboBox1.addItem("Draw");
-        jComboBox1.addItem(lblTeamB.getText());
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void rbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn2ActionPerformed
+        if (rbtn1.isSelected()) {
+            rbtn1.setSelected(false);
+        }
+        
+        getParent().repaint();
+        getParent().revalidate();
+    }//GEN-LAST:event_rbtn2ActionPerformed
+
+    private void rbtn2HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_rbtn2HierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtn2HierarchyChanged
+
+    private void rbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn1ActionPerformed
+        if (rbtn2.isSelected()) {
+            rbtn2.setSelected(false);
+        }
+//        rbtn1.setVisible(true);
+        getParent().repaint();
+        getParent().revalidate();
+    }//GEN-LAST:event_rbtn1ActionPerformed
+
+    private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
+        txtAmount.setEnabled(true);
+txtAmount.setFocusable(true);
+//jScrollPane1.repaint();
+//jScrollPane1.revalidate();
+        getParent().repaint();
+        getParent().revalidate();
+    }//GEN-LAST:event_txtAmountActionPerformed
 
 //    private void showMenu() {
 //        new Thread(new Runnable() {
@@ -510,13 +637,16 @@ private boolean showing = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnYes;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboAmount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBet;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDraw;
@@ -527,6 +657,8 @@ private boolean showing = false;
     private javax.swing.JLabel lblTeamB;
     private javax.swing.JLabel lblTeams;
     private javax.swing.JPanel panelCheck;
-    private javax.swing.JTextField txtDatee;
+    private javax.swing.JRadioButton rbtn1;
+    private javax.swing.JRadioButton rbtn2;
+    private javax.swing.JTextField txtAmount;
     // End of variables declaration//GEN-END:variables
 }

@@ -129,16 +129,25 @@ public class Login extends javax.swing.JFrame {
 
     private void bntLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLoginActionPerformed
        DataHandler dh = new DataHandler();
+        
         if (dh.userPresent(txtEmail.getText(), txtPass.getText()) == false) {
             JOptionPane.showMessageDialog(Login.this, "User not found\nPlease create new account");
         } else{
             User cu = dh.searchUser(txtEmail.getText(), txtPass.getText());
             CurrentUser.getInstance().setCurrentUser(cu);
-            
-           
-        MainPage m = new MainPage();
+            if (cu.isIsadmin()) {
+                Admin a = new Admin();
+                a.setVisible(true);
+                this.dispose();
+            }else{
+             MainPage m = new MainPage();
         m.setVisible(true);
         this.dispose();
+            }
+            
+            
+           
+       
         }
     }//GEN-LAST:event_bntLoginActionPerformed
 

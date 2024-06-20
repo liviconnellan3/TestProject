@@ -31,6 +31,11 @@ public class HouseEvent {
         this.draws = draws;
     }
 
+    public HouseEvent(String sport, String house) {
+        this.sport = sport;
+        this.house = house;
+    }
+
     
     public int getHouseeventsid() {
         return houseeventsid;

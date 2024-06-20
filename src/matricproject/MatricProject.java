@@ -23,11 +23,13 @@ public class MatricProject {
         Event e = new Event(1, "hockey", date1, "Wood", "Gane");
        User u = new User(1, "bob", "smith", "24bobs@kingswoodcollege.com", "bob123", 
                true, date, 9, "wood", 100, false);
+       Request r = new Request(7, 100, date1);
 //e.setOddsA(dh.calculatingOddsA(e));
 //e.setOddsB(dh.calculatingOddsB(e));
 //        System.out.println(dh.getAllEventsSportSpecified("hockey"));
 //dh.placeBetFinal(u, e, 10, "Wood");
-System.out.println(dh.searchUser("24bobs@kingswoodcollege.com", "bob123"));
+//dh.insertNewRequest(r);
+System.out.println(dh.getAllPastEvents());
 
                
 //        ArrayList<User> users = dh.getAllUsers();
