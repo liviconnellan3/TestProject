@@ -20,18 +20,28 @@ public class MatricProject {
         DataHandler dh = new DataHandler();
         LocalDate date = LocalDate.of(2002, 01, 01);
         LocalDate date1 = LocalDate.of(2021, 01, 01);
-        Event e = new Event(1, "hockey", date1, "Wood", "Gane");
+        Event e = new Event(1, "hockey", date1, "Chubb", "Gane");
        User u = new User(1, "bob", "smith", "24bobs@kingswoodcollege.com", "bob123", 
                true, date, 9, "wood", 100, false);
-       Request r = new Request(7, 100, date1);
-//e.setOddsA(dh.calculatingOddsA(e));
-//e.setOddsB(dh.calculatingOddsB(e));
-//        System.out.println(dh.getAllEventsSportSpecified("hockey"));
-//dh.placeBetFinal(u, e, 10, "Wood");
-//dh.insertNewRequest(r);
-System.out.println(dh.getAllPastEvents());
+       Betslip b = new Betslip( 1,1, 1, "Gane", 20,0.0,null);
+       
+//       Request r = new Request(7, 100, date1);
+////e.setOddsA(dh.calculatingOddsA(e));
+////e.setOddsB(dh.calculatingOddsB(e));
+////        System.out.println(dh.getAllEventsSportSpecified("hockey"));
+////dh.placeBetFinal(u, e, 10, "Wood");
+////dh.insertNewRequest(r);
 
-               
+//
+//
+//Login l = new Login();
+//l.setVisible(true);
+
+        //dh.updateBetWon(b, true); 
+        dh.updateWinner(e, "Chubb");
+        dh.updateAllBalances(e, "Chubb");
+        //dh.updateUserBalance(u, 11.0);
+       System.out.println(dh.getAllBetsForEvent(e));
 //        ArrayList<User> users = dh.getAllUsers();
 //      
 //        for (int i = 0; i < users.size(); i++) {

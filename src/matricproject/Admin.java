@@ -29,6 +29,7 @@ public class Admin extends javax.swing.JFrame {
         btnRequests = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnAddEvent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,7 +56,15 @@ public class Admin extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 150, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 160, -1));
+
+        btnAddEvent.setText("Add Event");
+        btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEventActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAddEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 160, -1));
 
         setSize(new java.awt.Dimension(946, 558));
         setLocationRelativeTo(null);
@@ -78,6 +87,12 @@ public class Admin extends javax.swing.JFrame {
         br.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+          AddEvent br = new AddEvent();
+        br.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,6 +130,7 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddEvent;
     private javax.swing.JButton btnRequests;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

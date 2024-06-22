@@ -14,9 +14,9 @@ public class Betslip {
     private int userid;
     private String chosenteam;
     private double amount, returnmount;
-    private boolean won;
+    private Boolean won;
 
-    public Betslip(int betid, int eventid, int userid, String chosenteam, double amount, double returnmount, boolean won) {
+    public Betslip(int betid, int eventid, int userid, String chosenteam, double amount, double returnmount, Boolean won) {
         this.betid = betid;
         this.eventid = eventid;
         this.userid = userid;
@@ -25,6 +25,8 @@ public class Betslip {
         this.returnmount = returnmount;
         this.won = won;
     }
+
+    
 
     public Betslip(int eventid, int userid, String chosenteam, double amount) {
         this.eventid = eventid;
@@ -57,9 +59,7 @@ public class Betslip {
         return returnmount;
     }
 
-    public boolean isWon() {
-        return won;
-    }
+   
 
     public void setBetid(int betid) {
         this.betid = betid;
@@ -85,14 +85,22 @@ public class Betslip {
         this.returnmount = returnmount;
     }
 
-    public void setWon(boolean won) {
+    public Boolean isWon() {
+        return won;
+    }
+
+    public void setWon(Boolean won) {
         this.won = won;
     }
 
     @Override
     public String toString() {
-        return "Betslip{" + "betid=" + betid + ", eventid=" + eventid + ", userid=" + userid + ", chosenteam=" + chosenteam + ", amount=" + amount + ", returnmount=" + returnmount + ", won=" + won + '}'+ "\n";
+        return "Betslip{" + "betid=" + betid + ", eventid=" + eventid + ", userid=" + userid + ", chosenteam=" + chosenteam + ", amount=" + amount + ", returnmount=" + returnmount + ", won=" + won + '}'+"\n";
     }
+
+    
+
+    
     
             
     

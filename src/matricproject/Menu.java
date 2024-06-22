@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import menu.MenuItem;
+import menuBody.History;
 import menuBody.userPanel;
 
 /**
@@ -43,8 +44,22 @@ public class Menu extends javax.swing.JFrame {
 //            }
 //        });
 //        
- MenuItem req = new MenuItem(iconRequest, "Staff001", null);
-MenuItem menuStaff1 = new MenuItem(iconUser, "Staff001", null);
+ MenuItem req = new MenuItem(iconUser, "Staff001", new ActionListener() {
+            @Override
+           public void actionPerformed(ActionEvent e) {
+             panelBody.add(new userPanel());
+             panelBody.repaint();
+             panelBody.revalidate();
+            }
+        });
+MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
+            @Override
+           public void actionPerformed(ActionEvent e) {
+             panelBody.add(new History());
+             panelBody.repaint();
+             panelBody.revalidate();
+            }
+        });
 
         addMenu(menuStaff1,req);
 
