@@ -38,10 +38,13 @@ public class MatricProject {
 //l.setVisible(true);
 
         //dh.updateBetWon(b, true); 
-        dh.updateWinner(e, "Chubb");
-        dh.updateAllBalances(e, "Chubb");
+    //    dh.updateWinner(e, "Chubb");
+    //    dh.updateAllBalances(e, "Chubb");
         //dh.updateUserBalance(u, 11.0);
-       System.out.println(dh.getAllBetsForEvent(e));
+       // dh.placeBetFinal(u, e, 33, "Gane");
+      //  dh.addOddsMethod();
+    //    dh.updateBetslipRA();
+       System.out.println();
 //        ArrayList<User> users = dh.getAllUsers();
 //      
 //        for (int i = 0; i < users.size(); i++) {

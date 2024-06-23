@@ -36,8 +36,8 @@ public class History extends javax.swing.JPanel {
         bets = dh.getUserBetslip(cu);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         
-        for (Betslip bets : dh.getUserBetslip(cu)) {
-            tableModel.addRow(new Object[]{bets.getBetid(), 
+        for (Betslip bets : dh.searchAllBetsForEventID(9)) {
+        tableModel.addRow(new Object[]{bets.getBetid(), 
                 dh.searchEventID(bets.getEventid()).getTeamA() + " vs " + dh.searchEventID(bets.getEventid()).getTeamB()
 , dh.searchEventID(bets.getEventid()).getSport(),
                 (dh.searchEventID(bets.getEventid()).getDate()).format(formatter),
@@ -45,7 +45,17 @@ public class History extends javax.swing.JPanel {
                 dh.returnAmount(dh.searchEventID(bets.getEventid()), bets),
                    betWon(bets)
             });
-    }
+        }
+//        for (Betslip bets : dh.getUserBetslip(cu)) {
+//            tableModel.addRow(new Object[]{bets.getBetid(), 
+//                dh.searchEventID(bets.getEventid()).getTeamA() + " vs " + dh.searchEventID(bets.getEventid()).getTeamB()
+//, dh.searchEventID(bets.getEventid()).getSport(),
+//                (dh.searchEventID(bets.getEventid()).getDate()).format(formatter),
+//                bets.getChosenteam() + " " +dh.getOddsOfBet(dh.searchEventID(bets.getEventid()), bets),bets.getAmount(),
+//                dh.returnAmount(dh.searchEventID(bets.getEventid()), bets),
+//                   betWon(bets)
+//            });
+  //  }
     }
     private String betWon(Betslip b){
          

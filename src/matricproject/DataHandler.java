@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.sql.Date;
 import java.sql.SQLException;
 
+
 /**
  *
  * @author User
@@ -41,7 +42,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllUsers error!!!");
         }
         return users;
     }
@@ -65,7 +66,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllEvents class error!!!");
         }
         return events;
     }
@@ -89,7 +90,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllUpcomingEvents error!!!");
         }
         return events;
     }
@@ -114,7 +115,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllPastEvents error!!!");
         }
         return events;
     }
@@ -143,7 +144,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getBetslip error!!!");
         }
         return bets;
     }
@@ -173,7 +174,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception err) {
-            System.err.println(err + "data handler class error!!!");
+            System.err.println(err + "getAllBetsForEvent error!!!");
         }
         return bets;
 
@@ -181,31 +182,65 @@ public class DataHandler {
         // return bets;
     }
     
-    public void updateAllBalances(Event e, String Winner){
-         ArrayList<Betslip> bets = new ArrayList();
-         bets = getAllBetsForEvent(e);
-         
-    for (int i = 0; i < bets.size(); i++) {
-            String chosenT = bets.get(i).getChosenteam();
-            if (chosenT.equalsIgnoreCase(Winner)) {
-                updateBetWon(bets.get(i), true);
+     public ArrayList<Betslip> searchAllBetsForEventID(int inID) {
 
-                double returnA = returnAmount(searchEventID(bets.get(i).getEventid()), bets.get(i));
-                returnA = 123;
+        ArrayList<Betslip> bets = new ArrayList();
+        try {
+            String sql = "SELECT * FROM usersdb.tblbets WHERE eventid = " + inID + ";";
+            Connect conn = new Connect();
+
+            ResultSet rs = conn.query(sql); //like scanner
+            while (rs.next()) { //while scanner. has next line basically
+                int betid = Integer.parseInt(rs.getString("betid"));
+                int eventid = Integer.parseInt(rs.getString("eventid"));
+                int usertid = Integer.parseInt(rs.getString("userid"));
+                String chosenteam = rs.getString("chosenteam");
+                double amount = rs.getDouble("amount");
+                double returnamount = rs.getDouble("returnamount");
+                Boolean won = null;
+                if (rs.getObject("won") != null) {
+                    won = rs.getBoolean("won");
+                }
+
+                Betslip b = new Betslip(betid, eventid, usertid, chosenteam, amount, returnamount, won);
+                bets.add(b);
+            }
+            conn.close(); //must close!!!
+        } catch (Exception err) {
+            System.err.println(err + "searchAllBetsForEventID  error!!!");
+        }
+        return bets;
+
+        
+        // return bets;
+    }
+
+    public void updateAllBalances(Event e, String winner){
+         ArrayList<Betslip> bet = new ArrayList();
+         bet = getAllBetsForEvent(e);
+         updateWinner(e, winner);
+    for (Betslip bets: getAllBetsForEvent(e)) {
+            String chosenT = bets.getChosenteam();
+            if (chosenT.equalsIgnoreCase(winner)) {
+                
+
+              //  double returnA = returnAmount(searchEventID(bets.getEventid()), bets.get(i));
+              double returnA = bets.getReturnmount();
+                
                         
-                bets.get(i).setReturnmount(returnA);
+                //bets.get(i).setReturnmount(returnA);
                 //  bets.get(i).setWon(Boolean.TRUE);
-                User u = searchUserID(bets.get(i).getUserid());
+                User u = searchUserID(bets.getUserid());
                 
                   updateUserBalance(u, u.getBalance() + returnA);
 
             } else {
-                 updateBetWon(bets.get(i), false);
-                double returnA = returnAmount(searchEventID(bets.get(i).getEventid()), bets.get(i));
-                 returnA = 123456;
-                bets.get(i).setReturnmount(returnA);
-                User u = searchUserID(bets.get(i).getUserid());
-                updateUserBalance(u, u.getBalance() - bets.get(i).getAmount());
+                 double returnA = bets.getReturnmount();
+                //double returnA = returnAmount(searchEventID(bets.get(i).getEventid()), bets.get(i));
+                 
+                
+                User u = searchUserID(bets.getUserid());
+                updateUserBalance(u, u.getBalance() - bets.getAmount());
                 
             }
 
@@ -236,7 +271,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "updateAllBalanceserror!!!");
         }
         return bets;
     }
@@ -261,7 +296,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllEventsSportSpecifiederror!!!");
         }
         return events;
     }
@@ -285,7 +320,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllRequests error!!!");
         }
         return request;
     }
@@ -311,7 +346,7 @@ public class DataHandler {
             }
             conn.close(); //must close!!!
         } catch (Exception e) {
-            System.err.println(e + "data handler class error!!!");
+            System.err.println(e + "getAllHouseEvents error!!!");
         }
         return houseEvents;
     }
@@ -349,7 +384,7 @@ public class DataHandler {
             }
 
         } catch (Exception er) {
-            System.err.println(er);
+            System.err.println(er + "calculatingOddsA error!!!!!!!");
         }
         double a = (winsA / (winsA + lossesA + drawsA)) * 100;
         double b = (winsB / (winsB + lossesB + drawsB)) * 100;
@@ -396,7 +431,7 @@ public class DataHandler {
             }
 
         } catch (Exception er) {
-            System.err.println(er);
+             System.err.println(er + "calculatingOddsB error!!!!!!!");
         }
         double a = (winsA / (winsA + lossesA + drawsA)) * 100;
         double b = (winsB / (winsB + lossesB + drawsB)) * 100;
@@ -442,7 +477,7 @@ public class DataHandler {
             }
 
         } catch (Exception er) {
-            System.err.println(er);
+             System.err.println(er + "calculatingDRAW error!!!!!!!");
         }
         double a = (drawsA / (winsA + lossesA + drawsA));
         double b = (drawsB / (winsB + lossesB + drawsB));
@@ -486,7 +521,7 @@ public class DataHandler {
             }
 
         } catch (Exception er) {
-            System.err.println(er);
+            System.err.println(er + "setOdds error!!!!!!!");
         }
         double a = (winsA / (winsA + lossesA + drawsA)) * 100;
         double b = (winsB / (winsB + lossesB + drawsB)) * 100;
@@ -527,7 +562,7 @@ public class DataHandler {
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "insert user !!!!");
+            System.err.println(e + "insertNewUserr errror !!!!");
         }
         return numRows;
     }
@@ -543,7 +578,7 @@ public class DataHandler {
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "insert request !!!!");
+            System.err.println(e + "insertNewRequest errrrror!!!!");
         }
         return numRows;
     }
@@ -557,7 +592,7 @@ public class DataHandler {
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "delete request !!!!");
+            System.err.println(e + "delete request errorrrrrrr !!!!");
         }
         return numRows;
     }
@@ -583,7 +618,7 @@ public class DataHandler {
             conn.equals(rs);
 
         } catch (SQLException er) {
-            System.err.println(er + "email user !!!!");
+            System.err.println(er + "searchRequest errorrrrr !!!!");
         }
         return e;
     }
@@ -597,7 +632,7 @@ public class DataHandler {
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "insert user !!!!");
+            System.err.println(e + "deleteUser errorrrrrr!!!!");
         }
         return numRows;
     }
@@ -611,7 +646,7 @@ public class DataHandler {
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "delete event !!!!");
+            System.err.println(e + "delete event errrorrrrrrr !!!!");
         }
 
     }
@@ -635,23 +670,25 @@ public class DataHandler {
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "update user !!!!");
+            System.err.println(e + "update user errorrrrrrrrrr !!!!");
         }
         return numRows;
     }
-    
+//   
 public void updateUserBalance(User u, Double x){
  int numRows = 0;
+ 
   try {
             //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
             String sql = "UPDATE usersdb.tblusers SET balance = " + x + " WHERE userid = " + u.getUserid() + ";"; 
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "update event !!!!");
+            System.err.println(e + "updateUserBalance errorrrrrrrr !!!!");
         }
  
 }
+
     public void updateEvent(Event u, int id) {
         int numRows = 0;
         try {
@@ -665,7 +702,48 @@ public void updateUserBalance(User u, Double x){
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
-            System.err.println(e + "update event !!!!");
+            System.err.println(e + "update event errorrrrr!!!!");
+        }
+
+    }
+      public void updateEventOdds(Event u) {
+        int numRows = 0;
+        try {
+            //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
+            String sql = "UPDATE usersdb.tblevents SET eventid = "
+                    + u.getEventid() + " , sport = \""
+                    + u.getSport() + "\", date = \""
+                    + u.getDate() + "\",teamA = \""
+                    + u.getTeamA() + "\" ,teamB =\""
+                    + u.getTeamB() + "\",oddsA = "
+                    + u.getOddsA()+ ", oddsB = "
+                    + u.getOddsB()+ ", oddsDraw ="
+                    +u.getOddsDraw() 
+                    +" WHERE eventid = " + u.getEventid() + ";";
+            Connect conn = new Connect();
+            numRows = conn.makeChange(sql);
+        } catch (SQLException e) {
+            System.err.println(e + "update event errorrrrr!!!!");
+        }
+
+    }
+      
+      public void updateBetslipppp(Betslip u) {
+        int numRows = 0;
+        try {
+            //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
+            String sql = "UPDATE usersdb.tblbets SET betid = "
+                    + u.getBetid() + " , eventid = "
+                    + u.getEventid() + ", userid = "
+                    + u.getUserid() + ",chosenteam = \""
+                    + u.getChosenteam() + "\" ,amount ="
+                    + u.getAmount() + ",returnamount = "
+                    + u.getReturnmount()
+                    +" WHERE betid = " + u.getBetid() + ";";
+            Connect conn = new Connect();
+            numRows = conn.makeChange(sql);
+        } catch (SQLException e) {
+            System.err.println(e + "update betslippppp errorrrrr!!!!");
         }
 
     }
@@ -679,11 +757,27 @@ public void updateUserBalance(User u, Double x){
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException ee) {
-            System.err.println(ee + "update user !!!!");
+            System.err.println(ee + "updateWinner errorrrrrrrrr !!!!");
         }
 
     }
 
+     public void updateBetslips(Event e, String winner){
+      int numRows = 0;
+         updateWinner(e, winner);
+        try {
+            //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
+            String sql1 = "UPDATE usersdb.tblbets SET won = true WHERE chosenteam = \"" +winner+"\" AND eventid = "+ e.getEventid() +";" ; 
+                String sql2 =      "UPDATE usersdb.tblbets SET won = false WHERE chosenteam != \"" +winner+"\" AND eventid = "+ e.getEventid() +";";
+                    
+            Connect conn = new Connect();
+            numRows = conn.makeChange(sql1);
+            numRows = conn.makeChange(sql2);
+        } catch (SQLException er) {
+            System.err.println(er + "updateBetslips errorrrrrr !!!!");
+        }
+     
+     }
     public void updateBetWon(Betslip b, Boolean tt) {
         int numRows = 0;
         try {
@@ -691,7 +785,7 @@ public void updateUserBalance(User u, Double x){
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException ee) {
-            System.err.println(ee + "update user !!!!");
+            System.err.println(ee + "updateBetWon errorr !!!!");
         }
     }
 
@@ -708,7 +802,7 @@ public void updateUserBalance(User u, Double x){
                 present = true;
             }
         } catch (SQLException e) {
-            System.err.println(e + "present user !!!!");
+            System.err.println(e + "user  present  error!!!!");
         }
         return present;
     }
@@ -726,7 +820,7 @@ public void updateUserBalance(User u, Double x){
                 present = true;
             }
         } catch (SQLException e) {
-            System.err.println(e + "email user !!!!");
+            System.err.println(e + "emailPresent errrr !!!!");
         }
         return present;
     }
@@ -759,7 +853,7 @@ public void updateUserBalance(User u, Double x){
             conn.equals(rs);
 
         } catch (SQLException e) {
-            System.err.println(e + "email user !!!!");
+            System.err.println(e + "searchUser errrrr !!!!");
         }
         return u;
     }
@@ -782,7 +876,7 @@ public void updateUserBalance(User u, Double x){
             conn.equals(rs);
 
         } catch (SQLException e) {
-            System.err.println(e + "email user !!!!");
+            System.err.println(e + "getWinnerEvent errrrrrr!!!!");
         }
         return win;
     }
@@ -815,7 +909,7 @@ public void updateUserBalance(User u, Double x){
             conn.equals(rs);
 
         } catch (SQLException e) {
-            System.err.println(e + "email user !!!!");
+            System.err.println(e + "searchUserID errrrr!!!!");
         }
         return u;
     }
@@ -842,7 +936,7 @@ public void updateUserBalance(User u, Double x){
             conn.equals(rs);
 
         } catch (SQLException er) {
-            System.err.println(er + "email user !!!!");
+            System.err.println(er + "searchEvent errrrrr !!!!");
         }
         return e;
     }
@@ -868,7 +962,7 @@ public void updateUserBalance(User u, Double x){
             conn.equals(rs);
 
         } catch (SQLException er) {
-            System.err.println(er + "email user !!!!");
+            System.err.println(er + "searchEventID errrrrrr!!!!");
         }
         return e;
     }
@@ -880,7 +974,7 @@ public void updateUserBalance(User u, Double x){
             Connect conn = new Connect();
             conn.makeChange(sql);
         } catch (Exception e) {
-            System.err.println(e + "udate balance!!");
+            System.err.println(e + "addBalance errrrrr!!");
         }
 
     }
@@ -902,7 +996,55 @@ public void updateUserBalance(User u, Double x){
         return 0.0;
 
     }
+    
+  public void setOddsOfEvent(Event e) {
+        e.setOddsA(calculatingOddsA(e));
+        e.setOddsB(calculatingOddsB(e));
+        e.setOddsDraw(calculatingDraw(e));
 
+       
+
+    }
+  
+  public void addOddsMethod(){
+  ArrayList<Event> events = new ArrayList();
+  events =getAllEvents();
+      for (Event event:getAllEvents()) {
+          setOddsOfEvent(event);
+          updateEventOdds(event);
+      }
+      
+  }
+  
+  public void setRA(Betslip bet){
+      String team = bet.getChosenteam();
+       Event e = searchEventID(bet.getEventid());
+             
+              double odds = 0.0;
+        setOddsOfEvent(e);
+        
+        if (e.getTeamA().equalsIgnoreCase(team)) {
+            odds = e.getOddsA();
+        }if (e.getTeamB().equalsIgnoreCase(team)) {
+            odds = e.getOddsB();
+        }if (team.equalsIgnoreCase("draw")) {
+            odds = e.getOddsB();
+        }
+        Double d = bet.getAmount()*odds;
+      bet.setReturnmount(d);
+  }
+  
+  public void updateBetslipRA() {
+      ArrayList<Betslip> bets = new ArrayList();
+      for (Betslip bet: getBetslip()) {
+          setRA(bet);
+          updateBetslipppp(bet);
+      }
+      //  Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
+        
+        
+    }
+  
     public Double getOddsOfBet(Event e, Betslip b) {
         e.setOddsA(calculatingOddsA(e));
         e.setOddsB(calculatingOddsB(e));
@@ -929,30 +1071,39 @@ public void updateUserBalance(User u, Double x){
             Connect conn = new Connect();
             conn.makeChange(sql);
         } catch (Exception e) {
-            System.err.println(e + "udate balance!!");
+            System.err.println(e + "subtractBalance errrrrrrr!!");
         }
 
     }
 
-    public void placeBet(User u, Event e, double amount, String team) {
-        Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
-    }
-//
+
     public void placeBetFinal(User u, Event e, double amount, String team) {
-        Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
+      //  Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
         subtractBalance(u, amount);
         int numRows = 0;
+        double odds = 0.0;
+        setOddsOfEvent(e);
+        
+        if (e.getTeamA().equalsIgnoreCase(team)) {
+            odds = e.getOddsA();
+        }if (e.getTeamB().equalsIgnoreCase(team)) {
+            odds = e.getOddsB();
+        }if (team.equalsIgnoreCase("draw")) {
+            odds = e.getOddsB();
+        }
         try {
-            String sql = "INSERT INTO usersdb.tblbets (eventid, userid, chosenteam, amount) VALUES("
+            String sql = "INSERT INTO usersdb.tblbets (eventid, userid, chosenteam, amount, returnamount) VALUES("
                     + e.getEventid() + ","
                     + u.getUserid() + ",\""
                     + team + "\","
-                    + amount + ");";
+                    + amount + ", "+ 
+                    amount*odds 
+                    + ");";
 
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (Exception er) {
-            System.err.println(er + "insert event!!!!");
+            System.err.println(er + "placeBetFinal errrrrrr!!!!");
         }
 
     }
@@ -970,7 +1121,7 @@ public void updateUserBalance(User u, Double x){
             numRows = conn.makeChange(sql);
 
         } catch (Exception er) {
-            System.err.println(er + "insert event!!!!");
+            System.err.println(er + "insert event errrrrrr!!!!");
         }
         return numRows;
     }

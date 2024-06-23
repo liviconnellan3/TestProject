@@ -17,6 +17,9 @@ public class Event {
     private String teamA, teamB;
     private double oddsA,oddsB, oddsDraw;
     private String winner;
+
+    public Event() {
+    }
     
 
     public Event(int eventid, String sport, LocalDate date, String teamA, String teamB, double oddsA, double oddsB, double oddsDraw, String winner) {
