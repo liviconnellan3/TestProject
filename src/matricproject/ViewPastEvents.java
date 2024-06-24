@@ -6,6 +6,7 @@ package matricproject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -23,49 +24,48 @@ public class ViewPastEvents extends javax.swing.JFrame {
         initComponents();
         refreshUI();
     }
-    
- public void populateTable() {
+
+    public void populateTable() {
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-          tableModel.setRowCount(0);
+        tableModel.setRowCount(0);
         DataHandler dh = new DataHandler();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (Event event : dh.getAllPastEvents()) {
-            tableModel.addRow(new Object[]{event.getEventid(), event.getSport(), event.getDate().format(formatter),event.getTeamA(), event.getTeamB(),
-            dh.calculatingOddsA(event), dh.calculatingOddsB(event), dh.calculatingDraw(event), dh.getWinnerEvent(event.getEventid())});
+            tableModel.addRow(new Object[]{event.getEventid(), event.getSport(), event.getDate().format(formatter), event.getTeamA(), event.getTeamB(),
+                dh.calculatingOddsA(event), dh.calculatingOddsB(event), dh.calculatingDraw(event), dh.getWinnerEvent(event.getEventid())});
         }
-    
+
 //code from ChatGPT
-jTable1.getSelectionModel() .addListSelectionListener(new ListSelectionListener() {
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) {
-            int selectedRow = jTable1.getSelectedRow();
-            if (selectedRow != -1) { // If a row is actually selected
-                DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = jTable1.getSelectedRow();
+                    if (selectedRow != -1) { // If a row is actually selected
+                        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
 
-                // Assuming your label is lblSelectedInfo
-                String TA = tableModel.getValueAt(selectedRow, 3)+"";
-                
-                rbtn1.setText(TA);
-                String TB = tableModel.getValueAt(selectedRow, 4)+"";
-                
-                rbtn2.setText(TB);
+                        // Assuming your label is lblSelectedInfo
+                        String TA = tableModel.getValueAt(selectedRow, 3) + "";
+
+                        rbtnTeamA.setText(TA);
+                        String TB = tableModel.getValueAt(selectedRow, 4) + "";
+
+                        rbtnTeamB.setText(TB);
+                    }
+                }
             }
-        }
+        });
     }
-});
-            }
 
-
-private void refreshUI() {
+    private void refreshUI() {
 //      jTable1.removeAll();
-      
+
         this.populateTable();
-        
+
     }
- 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,13 +77,17 @@ private void refreshUI() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        rbtn1 = new javax.swing.JRadioButton();
-        rbtn2 = new javax.swing.JRadioButton();
+        rbtnTeamA = new javax.swing.JRadioButton();
+        rbtnTeamB = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        draww = new javax.swing.JRadioButton();
+        rbtnDraw = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,134 +107,153 @@ private void refreshUI() {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        rbtn1.setText("jRadioButton1");
-        rbtn1.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 730, 300));
+
+        rbtnTeamA.setText("Team A");
+        rbtnTeamA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtn1ActionPerformed(evt);
+                rbtnTeamAActionPerformed(evt);
             }
         });
+        getContentPane().add(rbtnTeamA, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, 70, -1));
 
-        rbtn2.setText("jRadioButton2");
-        rbtn2.addActionListener(new java.awt.event.ActionListener() {
+        rbtnTeamB.setText("Team B");
+        rbtnTeamB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtn2ActionPerformed(evt);
+                rbtnTeamBActionPerformed(evt);
             }
         });
+        getContentPane().add(rbtnTeamB, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 80, -1));
 
-        jButton1.setText("jButton1");
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
+        jButton1.setText("Update Winner");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 458, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 254));
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 521, 80, -1));
 
-        draww.setText("jRadioButton1");
+        rbtnDraw.setText("Draw");
+        rbtnDraw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnDrawActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnDraw, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, 65, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(draww, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtn1)
-                    .addComponent(rbtn2)
-                    .addComponent(draww))
-                .addGap(26, 26, 26)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
-        );
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 60)); // NOI18N
+        jLabel3.setText("Past Events");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 320, 60));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setOpaque(true);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 800, 460));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/sport.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 0, 980, 550));
 
         setSize(new java.awt.Dimension(946, 558));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
         DataHandler dh = new DataHandler();
         int selectedRow = jTable1.getSelectedRow();
-        
-         int eventID = (int)tableModel.getValueAt(selectedRow, 0);
-        String sport = ""+ tableModel.getValueAt(selectedRow, 1);
-         String  date1 = tableModel.getValueAt(selectedRow, 2)+ "";
-       LocalDate date = LocalDate.parse(date1);
-        String TA = ""+ tableModel.getValueAt(selectedRow, 3);
-         String TB = ""+ tableModel.getValueAt(selectedRow, 4);
-         Event ee = new Event(eventID, sport, date, TA, TB);
-         
-         if (rbtn1.isSelected()) {
-              dh.updateBetslips(ee, TA);
-              dh.updateAllBalances(ee, TA);
-           //  dh.updateWinner(ee, TA);
-            // dh.updateAllBalences(ee, TA);
-            
-        } if (rbtn2.isSelected()) {
-             dh.updateBetslips(ee, TB);
-             
-              dh.updateAllBalances(ee, TB);
-         
-        } if (draww.isSelected()) {
-             dh.updateBetslips(ee, "draw");
-             
-              dh.updateAllBalances(ee, "draw");
+
+        String error = "";
+        if (rbtnTeamA.isSelected() == false && rbtnTeamB.isSelected() == false && rbtnDraw.isSelected() == false) {
+            error += "Must select a winner" + "\n";
         }
+        if (selectedRow == -1) {
+            error += "Must select an event";
+        }
+
+        if (error.isBlank() == false) {
+            JOptionPane.showMessageDialog(this, error, "Connot update winner", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int eventID = (int) tableModel.getValueAt(selectedRow, 0);
+            String sport = "" + tableModel.getValueAt(selectedRow, 1);
+            String date1 = tableModel.getValueAt(selectedRow, 2) + "";
+            LocalDate date = LocalDate.parse(date1);
+            String TA = "" + tableModel.getValueAt(selectedRow, 3);
+            String TB = "" + tableModel.getValueAt(selectedRow, 4);
+            Event ee = new Event(eventID, sport, date, TA, TB);
+
+             
+           String win = dh.getWinnerEvent(ee.getEventid());
+            if (win != null) {
+                JOptionPane.showMessageDialog(this, "Winner has already been selected", "Connot update winner", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                if (rbtnTeamA.isSelected()) {
+                    dh.updateBetslips(ee, TA);
+                    dh.updateAllBalances(ee, TA);
+                    dh.updateWinsLossesDraws(ee, TA);
+
+                }
+                if (rbtnTeamB.isSelected()) {
+                    dh.updateBetslips(ee, TB);
+
+                    dh.updateAllBalances(ee, TB);
+                    dh.updateWinsLossesDraws(ee, TB);
+                }
+                if (rbtnDraw.isSelected()) {
+                    dh.updateBetslips(ee, "draw");
+
+                    dh.updateAllBalances(ee, "draw");
+                    dh.updateWinsLossesDraws(ee, "draw");
+                }
 //         tableModel.setValueAt(ee.getWinner(), selectedRow, 8);
-        refreshUI();
+                refreshUI();
+            }
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void rbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn1ActionPerformed
-        if (rbtn2.isSelected()) {
-            rbtn2.setSelected(false);
+    private void rbtnTeamAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTeamAActionPerformed
+        if (rbtnTeamB.isSelected() || rbtnDraw.isSelected()) {
+            rbtnTeamB.setSelected(false);
+            rbtnDraw.setSelected(false);
         }
 //        rbtn1.setVisible(true);
-        
-    }//GEN-LAST:event_rbtn1ActionPerformed
 
-    private void rbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn2ActionPerformed
-        if (rbtn1.isSelected()) {
-            rbtn1.setSelected(false);
+    }//GEN-LAST:event_rbtnTeamAActionPerformed
+
+    private void rbtnTeamBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTeamBActionPerformed
+        if (rbtnTeamA.isSelected() || rbtnDraw.isSelected()) {
+            rbtnTeamA.setSelected(false);
+            rbtnDraw.setSelected(false);
         }
 //        rbtn1.setVisible(true);
-        
-    }//GEN-LAST:event_rbtn2ActionPerformed
+
+    }//GEN-LAST:event_rbtnTeamBActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Admin br = new Admin();
         br.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void rbtnDrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDrawActionPerformed
+        if (rbtnTeamA.isSelected() || rbtnTeamB.isSelected()) {
+            rbtnTeamB.setSelected(false);
+            rbtnTeamA.setSelected(false);
+        }
+    }//GEN-LAST:event_rbtnDrawActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,12 +291,15 @@ private void refreshUI() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton draww;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JRadioButton rbtn1;
-    private javax.swing.JRadioButton rbtn2;
+    private javax.swing.JRadioButton rbtnDraw;
+    private javax.swing.JRadioButton rbtnTeamA;
+    private javax.swing.JRadioButton rbtnTeamB;
     // End of variables declaration//GEN-END:variables
 }

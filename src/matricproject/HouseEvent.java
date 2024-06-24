@@ -14,6 +14,10 @@ public class HouseEvent {
     private String house;
     private double wins,losses,draws;
 
+    public HouseEvent() {
+    }
+
+    
     public HouseEvent(int houseeventsid, String sport, String house, double wins, double losses, double draws) {
         this.houseeventsid = houseeventsid;
         this.sport = sport;

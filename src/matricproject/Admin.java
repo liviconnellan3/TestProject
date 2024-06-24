@@ -30,41 +30,73 @@ public class Admin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnAddEvent = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRequests.setText("BetChipRequests");
+        btnRequests.setText("View BetChip Requests");
+        btnRequests.setBackground(new java.awt.Color(255, 255, 254));
+        btnRequests.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRequests.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestsActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRequests, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 160, -1));
+        getContentPane().add(btnRequests, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 180, -1));
 
         jButton1.setText("View Upcoming Events");
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 160, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 180, -1));
 
         jButton2.setText("View Past Events");
+        jButton2.setBackground(new java.awt.Color(255, 255, 254));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 160, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 180, -1));
 
         btnAddEvent.setText("Add Event");
+        btnAddEvent.setBackground(new java.awt.Color(255, 255, 254));
+        btnAddEvent.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddEventActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 160, -1));
+        getContentPane().add(btnAddEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 180, -1));
+
+        jButton3.setText("Back");
+        jButton3.setBackground(new java.awt.Color(255, 255, 254));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 510, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 60)); // NOI18N
+        jLabel1.setText("Welcome, Admin");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 450, 70));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 254));
+        jLabel2.setOpaque(true);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 530, 350));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/sport.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 0, 980, 550));
 
         setSize(new java.awt.Dimension(946, 558));
         setLocationRelativeTo(null);
@@ -93,6 +125,12 @@ public class Admin extends javax.swing.JFrame {
         br.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddEventActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        LandingPage lp = new LandingPage();
+        lp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,5 +172,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton btnRequests;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

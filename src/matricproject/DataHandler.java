@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.sql.Date;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author User
@@ -178,11 +177,10 @@ public class DataHandler {
         }
         return bets;
 
-        
         // return bets;
     }
-    
-     public ArrayList<Betslip> searchAllBetsForEventID(int inID) {
+
+    public ArrayList<Betslip> searchAllBetsForEventID(int inID) {
 
         ArrayList<Betslip> bets = new ArrayList();
         try {
@@ -211,42 +209,38 @@ public class DataHandler {
         }
         return bets;
 
-        
         // return bets;
     }
 
-    public void updateAllBalances(Event e, String winner){
-         ArrayList<Betslip> bet = new ArrayList();
-         bet = getAllBetsForEvent(e);
-         updateWinner(e, winner);
-    for (Betslip bets: getAllBetsForEvent(e)) {
+    public void updateAllBalances(Event e, String winner) {
+        ArrayList<Betslip> bet = new ArrayList();
+        bet = getAllBetsForEvent(e);
+        updateWinner(e, winner);
+        for (Betslip bets : getAllBetsForEvent(e)) {
             String chosenT = bets.getChosenteam();
             if (chosenT.equalsIgnoreCase(winner)) {
-                
 
-              //  double returnA = returnAmount(searchEventID(bets.getEventid()), bets.get(i));
-              double returnA = bets.getReturnmount();
-                
-                        
+                //  double returnA = returnAmount(searchEventID(bets.getEventid()), bets.get(i));
+                double returnA = bets.getReturnmount();
+
                 //bets.get(i).setReturnmount(returnA);
                 //  bets.get(i).setWon(Boolean.TRUE);
                 User u = searchUserID(bets.getUserid());
-                
-                  updateUserBalance(u, u.getBalance() + returnA);
+
+                updateUserBalance(u, u.getBalance() + returnA);
 
             } else {
-                 double returnA = bets.getReturnmount();
+                double returnA = bets.getReturnmount();
                 //double returnA = returnAmount(searchEventID(bets.get(i).getEventid()), bets.get(i));
-                 
-                
+
                 User u = searchUserID(bets.getUserid());
                 updateUserBalance(u, u.getBalance() - bets.getAmount());
-                
+
             }
 
         }
     }
-    
+
     public ArrayList<Betslip> getUserBetslip(User u) {
         ArrayList<Betslip> bets = new ArrayList();
         try {
@@ -276,11 +270,10 @@ public class DataHandler {
         return bets;
     }
 
-    
     public ArrayList<Event> getAllEventsSportSpecified(String inSport) {
         ArrayList<Event> events = new ArrayList();
         try {
-            String sql = "SELECT * FROM usersdb.tblevents WHERE sport = \"" + inSport + "\";"; //\" AND date = DATE(NOW())
+            String sql = "SELECT * FROM usersdb.tblevents WHERE sport = \"" + inSport + "\" AND date = curdate();"; //\" AND date = DATE(NOW())
             Connect conn = new Connect();
 
             ResultSet rs = conn.query(sql); //like scanner
@@ -431,7 +424,7 @@ public class DataHandler {
             }
 
         } catch (Exception er) {
-             System.err.println(er + "calculatingOddsB error!!!!!!!");
+            System.err.println(er + "calculatingOddsB error!!!!!!!");
         }
         double a = (winsA / (winsA + lossesA + drawsA)) * 100;
         double b = (winsB / (winsB + lossesB + drawsB)) * 100;
@@ -477,7 +470,7 @@ public class DataHandler {
             }
 
         } catch (Exception er) {
-             System.err.println(er + "calculatingDRAW error!!!!!!!");
+            System.err.println(er + "calculatingDRAW error!!!!!!!");
         }
         double a = (drawsA / (winsA + lossesA + drawsA));
         double b = (drawsB / (winsB + lossesB + drawsB));
@@ -640,8 +633,7 @@ public class DataHandler {
     public void deleteEvent(Event u) {
         int numRows = 0;
         try {
-            //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
-            String sql = "DELETE FROM usersdb.tblevents WHERE eventid = " + u.getEventid() + ";";
+           String sql = "DELETE FROM usersdb.tblevents WHERE eventid = " + u.getEventid() + ";";
 
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
@@ -675,19 +667,20 @@ public class DataHandler {
         return numRows;
     }
 //   
-public void updateUserBalance(User u, Double x){
- int numRows = 0;
- 
-  try {
+
+    public void updateUserBalance(User u, Double x) {
+        int numRows = 0;
+
+        try {
             //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
-            String sql = "UPDATE usersdb.tblusers SET balance = " + x + " WHERE userid = " + u.getUserid() + ";"; 
+            String sql = "UPDATE usersdb.tblusers SET balance = " + x + " WHERE userid = " + u.getUserid() + ";";
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
             System.err.println(e + "updateUserBalance errorrrrrrrr !!!!");
         }
- 
-}
+
+    }
 
     public void updateEvent(Event u, int id) {
         int numRows = 0;
@@ -706,7 +699,59 @@ public void updateUserBalance(User u, Double x){
         }
 
     }
-      public void updateEventOdds(Event u) {
+
+    /**
+     * Takes in houseevent and adds 1 to that houseevent's wins
+     *
+     * @param he
+     */
+    public void updateWinsHouseEvent(HouseEvent he) {
+        int numRows = 0;
+        try {
+            String sql = "UPDATE usersdb.tblhouseevents SET wins = wins+1 WHERE houseeventsid = " + he.getHouseeventsid() + ";";
+            Connect conn = new Connect();
+            numRows = conn.makeChange(sql);
+        } catch (Exception e) {
+            System.err.println(e + "updateWinsHouseEvent errorrrrr!!!!");
+        }
+
+    }
+
+    /**
+     * Takes in houseevent and adds 1 to that houseevent's losses
+     *
+     * @param he
+     */
+    public void updateLossesHouseEvent(HouseEvent he) {
+        int numRows = 0;
+        try {
+            String sql = "UPDATE usersdb.tblhouseevents SET losses = losses+1 WHERE houseeventsid = " + he.getHouseeventsid() + ";";
+            Connect conn = new Connect();
+            numRows = conn.makeChange(sql);
+        } catch (Exception e) {
+            System.err.println(e + "updateWinsHouseEvent errorrrrr!!!!");
+        }
+
+    }
+
+    /**
+     * Takes in houseevent and adds 1 to that houseevent's draws
+     *
+     * @param he
+     */
+    public void updateDrawsHouseEvent(HouseEvent he) {
+        int numRows = 0;
+        try {
+            String sql = "UPDATE usersdb.tblhouseevents SET draws = draws+1 WHERE houseeventsid = " + he.getHouseeventsid() + ";";
+            Connect conn = new Connect();
+            numRows = conn.makeChange(sql);
+        } catch (Exception e) {
+            System.err.println(e + "updateWinsHouseEvent errorrrrr!!!!");
+        }
+
+    }
+
+    public void updateEventOdds(Event u) {
         int numRows = 0;
         try {
             //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
@@ -716,10 +761,10 @@ public void updateUserBalance(User u, Double x){
                     + u.getDate() + "\",teamA = \""
                     + u.getTeamA() + "\" ,teamB =\""
                     + u.getTeamB() + "\",oddsA = "
-                    + u.getOddsA()+ ", oddsB = "
-                    + u.getOddsB()+ ", oddsDraw ="
-                    +u.getOddsDraw() 
-                    +" WHERE eventid = " + u.getEventid() + ";";
+                    + u.getOddsA() + ", oddsB = "
+                    + u.getOddsB() + ", oddsDraw ="
+                    + u.getOddsDraw()
+                    + " WHERE eventid = " + u.getEventid() + ";";
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
@@ -727,11 +772,10 @@ public void updateUserBalance(User u, Double x){
         }
 
     }
-      
-      public void updateBetslipppp(Betslip u) {
+
+    public void updateBetslipppp(Betslip u) {
         int numRows = 0;
         try {
-            //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
             String sql = "UPDATE usersdb.tblbets SET betid = "
                     + u.getBetid() + " , eventid = "
                     + u.getEventid() + ", userid = "
@@ -739,7 +783,7 @@ public void updateUserBalance(User u, Double x){
                     + u.getChosenteam() + "\" ,amount ="
                     + u.getAmount() + ",returnamount = "
                     + u.getReturnmount()
-                    +" WHERE betid = " + u.getBetid() + ";";
+                    + " WHERE betid = " + u.getBetid() + ";";
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException e) {
@@ -748,12 +792,13 @@ public void updateUserBalance(User u, Double x){
 
     }
 //
+
     public void updateWinner(Event e, String inW) {
         int numRows = 0;
         try {
             //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
             String sql = "UPDATE usersdb.tblevents SET winner = \"" + inW + "\" WHERE eventid = " + e.getEventid() + ";";
-            
+
             Connect conn = new Connect();
             numRows = conn.makeChange(sql);
         } catch (SQLException ee) {
@@ -762,22 +807,51 @@ public void updateUserBalance(User u, Double x){
 
     }
 
-     public void updateBetslips(Event e, String winner){
-      int numRows = 0;
-         updateWinner(e, winner);
+    public void updateWinsLossesDraws(Event e, String inWinner) {
+        updateWinner(e, inWinner);
+        HouseEvent TeamA = searchHouseEvent(e.getSport(), e.getTeamA());
+        HouseEvent TeamB = searchHouseEvent(e.getSport(), e.getTeamB());
+
+        if (inWinner.equalsIgnoreCase(TeamA.getHouse())) {
+
+            updateWinsHouseEvent(TeamA);
+            updateLossesHouseEvent(TeamB);
+        }
+        if (inWinner.equalsIgnoreCase(TeamB.getHouse())) {
+            updateWinsHouseEvent(TeamB);
+            updateLossesHouseEvent(TeamA);
+        }
+        if (inWinner.equalsIgnoreCase("draw")) {
+            updateDrawsHouseEvent(TeamB);
+            updateDrawsHouseEvent(TeamA);
+        }
+
+    }
+
+    public void updateEverything(Event e, String winner) {
+        updateAllBalances(e, winner);
+        updateBetslips(e, winner);
+        updateWinsLossesDraws(e, winner);
+
+    }
+
+    public void updateBetslips(Event e, String winner) {
+        int numRows = 0;
+        updateWinner(e, winner);
         try {
             //  surname, kcemail, password, isfemale, dob, grade, house) VALUES("livi","connellan","24oliviac@kingswoodcollege.com","livi123", 1, "2006-02-03",12,"wood")
-            String sql1 = "UPDATE usersdb.tblbets SET won = true WHERE chosenteam = \"" +winner+"\" AND eventid = "+ e.getEventid() +";" ; 
-                String sql2 =      "UPDATE usersdb.tblbets SET won = false WHERE chosenteam != \"" +winner+"\" AND eventid = "+ e.getEventid() +";";
-                    
+            String sql1 = "UPDATE usersdb.tblbets SET won = true WHERE chosenteam = \"" + winner + "\" AND eventid = " + e.getEventid() + ";";
+            String sql2 = "UPDATE usersdb.tblbets SET won = false WHERE chosenteam != \"" + winner + "\" AND eventid = " + e.getEventid() + ";";
+
             Connect conn = new Connect();
             numRows = conn.makeChange(sql1);
             numRows = conn.makeChange(sql2);
         } catch (SQLException er) {
             System.err.println(er + "updateBetslips errorrrrrr !!!!");
         }
-     
-     }
+
+    }
+
     public void updateBetWon(Betslip b, Boolean tt) {
         int numRows = 0;
         try {
@@ -807,6 +881,25 @@ public void updateUserBalance(User u, Double x){
         return present;
     }
 
+    public boolean checkIfPreviousBetMade(User u, Event e) {
+        boolean present = false;
+        try {
+            String sql = "SELECT * FROM usersdb.tblbets WHERE userid = "
+                    + u.getUserid() + " AND eventid = " + e.getEventid() + ";";
+            Connect conn = new Connect();
+
+            ResultSet rs = conn.query(sql);
+
+            if (rs.next()) {
+                present = true;
+            }
+        } catch (SQLException ee) {
+            System.err.println(e + "checkIfPreviousBetMade error!!!!");
+        }
+        return present;
+
+    }
+
     public boolean emailPresent(String inEmail) {
         boolean present = false;
         try {
@@ -823,6 +916,36 @@ public void updateUserBalance(User u, Double x){
             System.err.println(e + "emailPresent errrr !!!!");
         }
         return present;
+    }
+
+    /**
+     * Takes in a sport and houseName (string) and returns a houseEvent
+     *
+     * @param inSport
+     * @param inHouse
+     * @return
+     */
+    public HouseEvent searchHouseEvent(String inSport, String inHouse) {
+        HouseEvent he = new HouseEvent();
+        try {
+            String sql = "SELECT * FROM usersdb.tblhouseevents where sport = \"" + inSport + "\" AND house = \"" + inHouse + "\";";
+            Connect conn = new Connect();
+            ResultSet rs = conn.query(sql);
+
+            if (rs.next()) {
+                int houseeventsid = Integer.parseInt(rs.getString("houseeventsid"));
+                String sport = rs.getString("sport");
+                String house = rs.getString("house");
+                double wins = rs.getDouble("wins");
+                double losses = rs.getDouble("losses");
+                double draws = rs.getDouble("draws");
+
+                he = new HouseEvent(houseeventsid, sport, house, wins, losses, draws);
+            }
+        } catch (Exception e) {
+            System.err.println(e + "searchHouseEvent errrrr !!!!");
+        }
+        return he;
     }
 
     public User searchUser(String inEmail, String inPass) {
@@ -992,59 +1115,58 @@ public void updateUserBalance(User u, Double x){
         }
         if (b.getChosenteam().equalsIgnoreCase("draw")) {
             return e.getOddsDraw() * b.getAmount();
-        } 
+        }
         return 0.0;
 
     }
-    
-  public void setOddsOfEvent(Event e) {
+
+    public void setOddsOfEvent(Event e) {
         e.setOddsA(calculatingOddsA(e));
         e.setOddsB(calculatingOddsB(e));
         e.setOddsDraw(calculatingDraw(e));
 
-       
+    }
+
+    public void addOddsMethod() {
+        ArrayList<Event> events = new ArrayList();
+        events = getAllEvents();
+        for (Event event : getAllEvents()) {
+            setOddsOfEvent(event);
+            updateEventOdds(event);
+        }
 
     }
-  
-  public void addOddsMethod(){
-  ArrayList<Event> events = new ArrayList();
-  events =getAllEvents();
-      for (Event event:getAllEvents()) {
-          setOddsOfEvent(event);
-          updateEventOdds(event);
-      }
-      
-  }
-  
-  public void setRA(Betslip bet){
-      String team = bet.getChosenteam();
-       Event e = searchEventID(bet.getEventid());
-             
-              double odds = 0.0;
+
+    public void setRA(Betslip bet) {
+        String team = bet.getChosenteam();
+        Event e = searchEventID(bet.getEventid());
+
+        double odds = 0.0;
         setOddsOfEvent(e);
-        
+
         if (e.getTeamA().equalsIgnoreCase(team)) {
             odds = e.getOddsA();
-        }if (e.getTeamB().equalsIgnoreCase(team)) {
-            odds = e.getOddsB();
-        }if (team.equalsIgnoreCase("draw")) {
+        }
+        if (e.getTeamB().equalsIgnoreCase(team)) {
             odds = e.getOddsB();
         }
-        Double d = bet.getAmount()*odds;
-      bet.setReturnmount(d);
-  }
-  
-  public void updateBetslipRA() {
-      ArrayList<Betslip> bets = new ArrayList();
-      for (Betslip bet: getBetslip()) {
-          setRA(bet);
-          updateBetslipppp(bet);
-      }
-      //  Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
-        
-        
+        if (team.equalsIgnoreCase("draw")) {
+            odds = e.getOddsB();
+        }
+        Double d = bet.getAmount() * odds;
+        bet.setReturnmount(d);
     }
-  
+
+    public void updateBetslipRA() {
+        ArrayList<Betslip> bets = new ArrayList();
+        for (Betslip bet : getBetslip()) {
+            setRA(bet);
+            updateBetslipppp(bet);
+        }
+        //  Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
+
+    }
+
     public Double getOddsOfBet(Event e, Betslip b) {
         e.setOddsA(calculatingOddsA(e));
         e.setOddsB(calculatingOddsB(e));
@@ -1076,19 +1198,21 @@ public void updateUserBalance(User u, Double x){
 
     }
 
-
     public void placeBetFinal(User u, Event e, double amount, String team) {
-      //  Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
+        //  Betslip b = new Betslip(e.getEventid(), u.getUserid(), team, amount);
         subtractBalance(u, amount);
+
         int numRows = 0;
         double odds = 0.0;
         setOddsOfEvent(e);
-        
+
         if (e.getTeamA().equalsIgnoreCase(team)) {
             odds = e.getOddsA();
-        }if (e.getTeamB().equalsIgnoreCase(team)) {
+        }
+        if (e.getTeamB().equalsIgnoreCase(team)) {
             odds = e.getOddsB();
-        }if (team.equalsIgnoreCase("draw")) {
+        }
+        if (team.equalsIgnoreCase("draw")) {
             odds = e.getOddsB();
         }
         try {
@@ -1096,8 +1220,8 @@ public void updateUserBalance(User u, Double x){
                     + e.getEventid() + ","
                     + u.getUserid() + ",\""
                     + team + "\","
-                    + amount + ", "+ 
-                    amount*odds 
+                    + amount + ", "
+                    + amount * odds
                     + ");";
 
             Connect conn = new Connect();
@@ -1108,6 +1232,34 @@ public void updateUserBalance(User u, Double x){
 
     }
 
+    public boolean checkSportInput(String inSport) {
+        if (inSport.equalsIgnoreCase("hockey")
+                || inSport.equalsIgnoreCase("rugby")
+                || inSport.equalsIgnoreCase("waterpolo")
+                || inSport.equalsIgnoreCase("netball")
+                || inSport.equalsIgnoreCase("squash")
+                || inSport.equalsIgnoreCase("tennis")
+                || inSport.equalsIgnoreCase("cricket")
+                || inSport.equalsIgnoreCase("basketball")) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+    
+ public boolean checkTeamInput(String inTeam) {
+        if (inTeam.equalsIgnoreCase("chubb")
+                || inTeam.equalsIgnoreCase("jagger")
+                || inTeam.equalsIgnoreCase("wood")
+                || inTeam.equalsIgnoreCase("gane")
+                ) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
     public int insertEvent(Event e) {
         int numRows = 0;
         try {

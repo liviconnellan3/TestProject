@@ -36,7 +36,7 @@ public class History extends javax.swing.JPanel {
         bets = dh.getUserBetslip(cu);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         
-        for (Betslip bets : dh.searchAllBetsForEventID(9)) {
+        for (Betslip bets : dh.getUserBetslip(cu)) {
         tableModel.addRow(new Object[]{bets.getBetid(), 
                 dh.searchEventID(bets.getEventid()).getTeamA() + " vs " + dh.searchEventID(bets.getEventid()).getTeamB()
 , dh.searchEventID(bets.getEventid()).getSport(),
@@ -86,6 +86,8 @@ public class History extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -102,7 +104,7 @@ public class History extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 204));
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -113,9 +115,7 @@ public class History extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

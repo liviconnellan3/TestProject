@@ -39,61 +39,63 @@ private DataHandler dh;
         jButton1 = new javax.swing.JButton();
         datePicker = new com.github.lgooddatepicker.components.DatePicker();
         comboSport = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSport.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblSport.setText("Select Sport");
-        jPanel1.add(lblSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 130, -1));
+        lblSport.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jPanel1.add(lblSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 130, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("Team A");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 130, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 130, -1));
 
-        comboTeamA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         comboTeamA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chubb", "Gane", "Jagger", "Wood" }));
-        jPanel1.add(comboTeamA, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 90, -1));
+        comboTeamA.setBackground(new java.awt.Color(255, 255, 254));
+        comboTeamA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(comboTeamA, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 90, -1));
 
-        comboTeamB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         comboTeamB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chubb", "Gane", "Jagger", "Wood" }));
-        jPanel1.add(comboTeamB, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 90, -1));
+        comboTeamB.setBackground(new java.awt.Color(255, 255, 254));
+        comboTeamB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(comboTeamB, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 90, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel2.setText("Team B");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 140, -1));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 140, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Add Event");
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 120, -1));
-        jPanel1.add(datePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 120, -1));
+        jPanel1.add(datePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, -1, -1));
 
+        comboSport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hockey", "rugby", "netball", "waterpolo", "squash", "tennis", "cricket", "basketball" }));
+        comboSport.setBackground(new java.awt.Color(255, 255, 254));
         comboSport.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        comboSport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hockey", "rugby", "netball", "waterpolo" }));
-        jPanel1.add(comboSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 90, -1));
+        jPanel1.add(comboSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 90, -1));
 
-        jLabel4.setBackground(new java.awt.Color(255, 204, 255));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("Add Event");
-        jLabel4.setOpaque(true);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 50));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel5.setText("Date Of Event");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 150, 20));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 150, 20));
 
         jButton2.setText("Back");
+        jButton2.setBackground(new java.awt.Color(255, 255, 254));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -101,16 +103,18 @@ private DataHandler dh;
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 510, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-        );
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 60)); // NOI18N
+        jLabel3.setText("Add Event");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 290, 70));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setOpaque(true);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 470, 400));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/sport.jpg"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 0, 980, 550));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 550));
 
         setSize(new java.awt.Dimension(946, 558));
         setLocationRelativeTo(null);
@@ -118,9 +122,22 @@ private DataHandler dh;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       DataHandler dh = new DataHandler();
-      
-        if (comboTeamA.getSelectedItem() != comboTeamB.getSelectedItem()) {
-             String sport = comboSport.getSelectedItem() + "";
+      String error = "";
+        if (comboTeamA.getSelectedItem() == comboTeamB.getSelectedItem()) {
+            error += "Must select two different teams"+"\n";        
+        }
+        if (datePicker.getDate() == null) {
+            error += "Must select date"+"\n";        
+        }else{
+         if (datePicker.getDate().isBefore(LocalDate.now())) {
+            error += "Date must be in the future"+"\n";        
+        }}
+         
+         if (error.isBlank() == false) {
+             JOptionPane.showMessageDialog(this, error, "Connot add new event", JOptionPane.ERROR_MESSAGE);
+
+        }else{
+            String sport = comboSport.getSelectedItem() + "";
         String date1 = datePicker.getDateStringOrEmptyString();
         LocalDate date = LocalDate.parse(date1);
         String teamA = comboTeamA.getSelectedItem() + "";
@@ -130,8 +147,7 @@ private DataHandler dh;
         
         dh.insertEvent(e);
         JOptionPane.showMessageDialog(AddEvent.this, "New event has been sucessfully added");
-        }else{
-        JOptionPane.showMessageDialog(AddEvent.this, "Must select two different teams");
+       
                
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -187,8 +203,10 @@ private DataHandler dh;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblSport;
     // End of variables declaration//GEN-END:variables

@@ -11,7 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import menu.MenuItem;
 import menuBody.History;
-import menuBody.userPanel;
+import menuBody.helpPanel;
+import menuBody.requestPanel;
 
 /**
  *
@@ -30,11 +31,11 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public void createMenu() {
-        ImageIcon iconUser = new ImageIcon(getClass().getResource("/menu/user.png"));
-        ImageIcon iconRequest = new ImageIcon(getClass().getResource("/menu/request.png"));
-        
+        ImageIcon iconHistory = new ImageIcon(getClass().getResource("/menu/history.png"));
+        ImageIcon iconRequest = new ImageIcon(getClass().getResource("/menu/chips.png"));
+         ImageIcon iconHelp = new ImageIcon(getClass().getResource("/menu/helpp.png"));
 
-   //  MenuItem menuStaff1 = new MenuItem(iconUser, "Staff001", null);
+        //  MenuItem menuStaff1 = new MenuItem(iconUser, "Staff001", null);
 //        MenuItem menuUser = new MenuItem(iconUser, "Profile", new ActionListener() {
 //            @Override
 //           public void actionPerformed(ActionEvent e) {
@@ -44,27 +45,40 @@ public class Menu extends javax.swing.JFrame {
 //            }
 //        });
 //        
- MenuItem req = new MenuItem(iconUser, "Staff001", new ActionListener() {
+        MenuItem request = new MenuItem(iconRequest, "Request Betchips", new ActionListener() {
             @Override
-           public void actionPerformed(ActionEvent e) {
-             panelBody.add(new userPanel());
-             panelBody.repaint();
-             panelBody.revalidate();
+            public void actionPerformed(ActionEvent e) {
+                panelBody.removeAll();
+                panelBody.add(new requestPanel());
+                panelBody.repaint();
+                panelBody.revalidate();
             }
         });
-MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
+        MenuItem history = new MenuItem(iconHistory, "View History", new ActionListener() {
             @Override
-           public void actionPerformed(ActionEvent e) {
-             panelBody.add(new History());
-             panelBody.repaint();
-             panelBody.revalidate();
+            public void actionPerformed(ActionEvent e) {
+                panelBody.removeAll();
+                panelBody.add(new History());
+                panelBody.repaint();
+                panelBody.revalidate();
+            }
+        });
+        
+         MenuItem help = new MenuItem(iconHelp, "Help", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelBody.removeAll();
+                panelBody.add(new helpPanel());
+                panelBody.repaint();
+                panelBody.revalidate();
             }
         });
 
-        addMenu(menuStaff1,req);
+        addMenu(history, request, help);
 
     }
- private void addMenu(MenuItem... menu) {
+
+    private void addMenu(MenuItem... menu) {
         for (int i = 0; i < menu.length; i++) {
             menus.add(menu[i]);
 //            ArrayList<MenuItem> submenu = menu[i].getSubmenu();
@@ -74,6 +88,7 @@ MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
         }
 //        menus.revalidate(); // ensures that the component and its children are properly sized and positioned
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,8 +99,9 @@ MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
     private void initComponents() {
 
         panelMenu = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        btnLogOut = new javax.swing.JButton();
         panelBody = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,23 +109,46 @@ MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
         panelMenu.setPreferredSize(new java.awt.Dimension(175, 555));
 
-        jScrollPane1.setBorder(null);
-
         menus.setBackground(new java.awt.Color(255, 255, 255));
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
-        jScrollPane1.setViewportView(menus);
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnLogOut.setText("Log Out");
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogOutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(menus, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(menus, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogOut)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
@@ -120,6 +159,17 @@ MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
         setSize(new java.awt.Dimension(941, 563));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MainPage m = new MainPage();
+        m.setVisible(true);
+        this.dispose();
+                
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnLogOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,7 +207,8 @@ MenuItem menuStaff1 = new MenuItem(iconUser, "History", new ActionListener() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel menus;
     private javax.swing.JPanel panelBody;
     private javax.swing.JPanel panelMenu;

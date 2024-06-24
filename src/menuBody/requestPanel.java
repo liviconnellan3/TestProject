@@ -5,6 +5,7 @@
 package menuBody;
 
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import matricproject.CurrentUser;
 import matricproject.DataHandler;
 import matricproject.MainPage;
@@ -15,12 +16,12 @@ import matricproject.User;
  *
  * @author User
  */
-public class userPanel extends javax.swing.JPanel {
+public class requestPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form userPanel
      */
-    public userPanel() {
+    public requestPanel() {
         initComponents();
         displayBalance();
     }
@@ -141,6 +142,7 @@ public class userPanel extends javax.swing.JPanel {
         DataHandler dh = new DataHandler();
         Request r = new Request(cu.getUserid(), Double.parseDouble(txtAmount.getText()), LocalDate.now());
         dh.insertNewRequest(r);
+        JOptionPane.showMessageDialog(this, "request sent successfully");
                 
     }//GEN-LAST:event_btnrequestActionPerformed
 

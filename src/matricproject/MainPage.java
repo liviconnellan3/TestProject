@@ -21,105 +21,174 @@ public class MainPage extends javax.swing.JFrame {
      * Creates new form MainPage
      */
     public MainPage() {
+        
         initComponents();
-      panelBets.setVisible(false);
+        panelBets.setVisible(false);
+        updateBalance();
     }
-  private  ArrayList<Event> eventss = new ArrayList<>();
-  
+    
+    private ArrayList<Event> eventss = new ArrayList<>();
+
     public void execute(String sport) {
         clearPanels();
         DataHandler dh = new DataHandler();
-       eventss =  dh.getAllEventsSportSpecified(sport);
-        
+        eventss = dh.getAllEventsSportSpecified(sport);
+
         for (int i = 0; i < eventss.size(); i++) {
             EventItem e = new EventItem(eventss.get(i), this);
             addEvent(e, sport);
         }
         refreshPanels();
-                
 
     }
-    public void setLabelVisible(){
-    panelBets.setVisible(true);
-    lblEventBet.setVisible(true);
+
+    public void setLabelVisible() {
+        panelBets.setVisible(true);
+        lblEventBet.setVisible(true);
     }
-    
-    public void setPanelBetsVisible(){
-     panelBets.setVisible(true);
-    lblEventBet.setVisible(true);
-     //rbtnTA.setVisible(true);
-       //  rbtnTB.setVisible(true);
+
+    public void updateBalance() {
+        User cu = CurrentUser.getInstance().getCurrentUser();
+        lblBalance.setText("" + cu.getBalance());
+        lblBalance.repaint();
+
     }
-    
-    public void setrbtnText(String TA, String TB){
-    panelBets.setVisible(true);
-    rbtnTA.setText(TA);
-    rbtnTB.setText(TB);
+
+    public void setPanelBetsVisible() {
+        panelBets.setVisible(true);
+        lblEventBet.setVisible(true);
+        //rbtnTA.setVisible(true);
+        //  rbtnTB.setVisible(true);
     }
-    public void setSelectedTeamA(){
-    rbtnTA.setSelected(true);
-     rbtnDraw.setSelected(false);
-      rbtnTB.setSelected(false);
-    
+
+    public void setrbtnText(String TA, String TB) {
+        panelBets.setVisible(true);
+        rbtnTA.setText(TA);
+        rbtnTB.setText(TB);
     }
-    public void setSelectedTeamB(){
-    rbtnTB.setSelected(true);
-    rbtnTA.setSelected(false);
-    rbtnDraw.setSelected(false);
-    
+
+    public void setSelectedTeamA() {
+        rbtnTA.setSelected(true);
+        rbtnDraw.setSelected(false);
+        rbtnTB.setSelected(false);
+
     }
-    public void setSelectedDraw(){
-    rbtnDraw.setSelected(true);
-    rbtnTA.setSelected(false);
-    rbtnTB.setSelected(false);
-    
+
+    public void setSelectedTeamB() {
+        rbtnTB.setSelected(true);
+        rbtnTA.setSelected(false);
+        rbtnDraw.setSelected(false);
+
     }
-    public void setlblEventText(String txt, String date, String sport){
-     panelBets.setVisible(true);
-     lblEventBet.setText(txt);
-     lblDateEvent.setText(date);
-     lblSport.setText(sport);
+
+    public void setSelectedDraw() {
+        rbtnDraw.setSelected(true);
+        rbtnTA.setSelected(false);
+        rbtnTB.setSelected(false);
+
     }
-    
+
+    public void setlblEventText(String txt, String date, String sport) {
+        panelBets.setVisible(true);
+        lblEventBet.setText(txt);
+        lblDateEvent.setText(date);
+        lblSport.setText(sport);
+    }
+
     private void refreshPanels() {
-        panel1.revalidate();
-        panel1.repaint();
-        panel2.revalidate();
-        panel2.repaint();
-        panel3.revalidate();
-        panel3.repaint();
-    }
-  
- private void addEvent(EventItem event, String inSport){
-     switch (inSport) {
-         case "hockey":
-             event.setAlignmentX(Component.LEFT_ALIGNMENT); 
-             panel1.add(event);
-             break;
-             case "rugby":
-             panel2.add(event);
-             break;
-         default:
-             throw new AssertionError();
-     }
-        
-    
-    }
- 
- private void clearPanels() {
-    panel1.removeAll();
-    panel2.removeAll();
-     panel3.removeAll();
-    
-    // You may need to call revalidate and repaint to update the UI after removing components
-    panel1.revalidate();
-    panel1.repaint();
-    panel2.revalidate();
-    panel2.repaint();
-    panel3.revalidate();
-    panel3.repaint();
-}
+        panelhockey.revalidate();
+        panelhockey.repaint();
+        panelRugby.revalidate();
+        panelRugby.repaint();
+        panelWaterpolo.revalidate();
+        panelWaterpolo.repaint();
+        panelNetball.revalidate();
+        panelSquash.revalidate();
+        panelTennis.revalidate();
+        panelCricket.revalidate();
+        panelBasketball.revalidate();
 
+        panelNetball.repaint();
+        panelSquash.repaint();
+        panelTennis.repaint();
+        panelCricket.repaint();
+        panelBasketball.repaint();
+    }
+
+    private void addEvent(EventItem event, String inSport) {
+        switch (inSport) {
+            case "hockey":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelhockey.add(event);
+                break;
+            case "rugby":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelRugby.add(event);
+                break;
+            case "waterpolo":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelWaterpolo.add(event);
+                break;
+            case "netball":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelNetball.add(event);
+                break;
+            case "squash":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelSquash.add(event);
+                break;
+
+            case "tennis":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelTennis.add(event);
+                break;
+
+            case "cricket":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelCricket.add(event);
+                break;
+
+            case "basketball":
+                event.setAlignmentX(Component.LEFT_ALIGNMENT);
+                panelBasketball.add(event);
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+    }
+
+    private void clearPanels() {
+        panelhockey.removeAll();
+        panelRugby.removeAll();
+        panelWaterpolo.removeAll();
+        panelNetball.removeAll();
+        panelSquash.removeAll();
+        panelTennis.removeAll();
+        panelCricket.removeAll();
+        panelBasketball.removeAll();
+
+        // You may need to call revalidate and repaint to update the UI after removing components
+        panelhockey.revalidate();
+        panelhockey.repaint();
+        panelRugby.revalidate();
+        panelRugby.repaint();
+        panelWaterpolo.revalidate();
+        panelWaterpolo.repaint();
+
+        panelNetball.revalidate();
+        panelSquash.revalidate();
+        panelTennis.revalidate();
+        panelCricket.revalidate();
+        panelBasketball.revalidate();
+
+        panelNetball.repaint();
+        panelSquash.repaint();
+        panelTennis.repaint();
+        panelCricket.repaint();
+        panelBasketball.repaint();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,20 +202,42 @@ public class MainPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel6 = new javax.swing.JPanel();
+        lblBalance = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        lblHockey = new javax.swing.JLabel();
+        lblRugby = new javax.swing.JLabel();
+        lblWaterpolo = new javax.swing.JLabel();
+        lblNetball = new javax.swing.JLabel();
+        lblsquash = new javax.swing.JLabel();
+        lbltennis = new javax.swing.JLabel();
+        lblcricket = new javax.swing.JLabel();
+        lblbasketball = new javax.swing.JLabel();
+        jTabbedPaneSport = new javax.swing.JTabbedPane();
+        panelHock = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        panel1 = new javax.swing.JPanel();
-        panel2 = new javax.swing.JPanel();
-        panel3 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
+        panelhockey = new javax.swing.JPanel();
+        panelrugby = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelRugby = new javax.swing.JPanel();
+        panelwaterpolo = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelWaterpolo = new javax.swing.JPanel();
+        panelnetball = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        panelNetball = new javax.swing.JPanel();
+        panelsquash = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        panelSquash = new javax.swing.JPanel();
+        paneltennis = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        panelTennis = new javax.swing.JPanel();
+        panelcricket = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        panelCricket = new javax.swing.JPanel();
+        panelbasketball = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        panelBasketball = new javax.swing.JPanel();
         panelBets = new javax.swing.JPanel();
         lblEventBet = new javax.swing.JLabel();
         lblSport = new javax.swing.JLabel();
@@ -157,6 +248,7 @@ public class MainPage extends javax.swing.JFrame {
         txtAmount = new javax.swing.JTextField();
         btnConfirmBet = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -175,6 +267,14 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Balance:");
+
+        lblBalance.setBackground(new java.awt.Color(255, 255, 255));
+        lblBalance.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblBalance.setText(".");
+        lblBalance.setOpaque(true);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -182,34 +282,79 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(797, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel4)
+                .addComponent(lblBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
 
-        jPanel5.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setPreferredSize(new java.awt.Dimension(930, 45));
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/hockey36.png"))); // NOI18N
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jLabel3.setOpaque(true);
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblHockey.setBackground(new java.awt.Color(255, 255, 255));
+        lblHockey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconHockey.png"))); // NOI18N
+        lblHockey.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
+                lblHockeyMousePressed(evt);
             }
         });
 
-        jLabel4.setText("2");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblRugby.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconRugby.png"))); // NOI18N
+        lblRugby.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lblRugbyMousePressed(evt);
+            }
+        });
+
+        lblWaterpolo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconWaterPolo.png"))); // NOI18N
+        lblWaterpolo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblWaterpoloMousePressed(evt);
+            }
+        });
+
+        lblNetball.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-netball-36.png"))); // NOI18N
+        lblNetball.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblNetballMousePressed(evt);
+            }
+        });
+
+        lblsquash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-squash-36.png"))); // NOI18N
+        lblsquash.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblsquashMousePressed(evt);
+            }
+        });
+
+        lbltennis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-tennis-36.png"))); // NOI18N
+        lbltennis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbltennisMousePressed(evt);
+            }
+        });
+
+        lblcricket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-cricket-36.png"))); // NOI18N
+        lblcricket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblcricketMousePressed(evt);
+            }
+        });
+
+        lblbasketball.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-basketball-36 (2).png"))); // NOI18N
+        lblbasketball.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblbasketballMousePressed(evt);
             }
         });
 
@@ -219,138 +364,199 @@ public class MainPage extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(812, Short.MAX_VALUE))
+                .addComponent(lblHockey)
+                .addGap(18, 18, 18)
+                .addComponent(lblRugby)
+                .addGap(18, 18, 18)
+                .addComponent(lblWaterpolo)
+                .addGap(18, 18, 18)
+                .addComponent(lblNetball)
+                .addGap(18, 18, 18)
+                .addComponent(lblsquash)
+                .addGap(18, 18, 18)
+                .addComponent(lbltennis)
+                .addGap(18, 18, 18)
+                .addComponent(lblcricket)
+                .addGap(18, 18, 18)
+                .addComponent(lblbasketball)
+                .addContainerGap(510, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblHockey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblRugby, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblWaterpolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNetball, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblsquash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbltennis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblcricket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblbasketball, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 930, 50));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 930, 45));
 
-        jTabbedPane2.setPreferredSize(new java.awt.Dimension(605, 459));
+        jTabbedPaneSport.setPreferredSize(new java.awt.Dimension(605, 459));
 
-        panel1.setLayout(new javax.swing.BoxLayout(panel1, javax.swing.BoxLayout.Y_AXIS));
-        jScrollPane2.setViewportView(panel1);
+        panelhockey.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                panelhockeyKeyTyped(evt);
+            }
+        });
+        panelhockey.setLayout(new javax.swing.BoxLayout(panelhockey, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane2.setViewportView(panelhockey);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelHockLayout = new javax.swing.GroupLayout(panelHock);
+        panelHock.setLayout(panelHockLayout);
+        panelHockLayout.setHorizontalGroup(
+            panelHockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+        panelHockLayout.setVerticalGroup(
+            panelHockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHockLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane2.addTab("tab1", jPanel6);
+        jTabbedPaneSport.addTab("tab1", panelHock);
 
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
-        );
+        panelRugby.setAlignmentX(0.0F);
+        panelRugby.setLayout(new javax.swing.BoxLayout(panelRugby, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(panelRugby);
 
-        jTabbedPane2.addTab("tab2", panel2);
-
-        javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
-        panel3.setLayout(panel3Layout);
-        panel3Layout.setHorizontalGroup(
-            panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelrugbyLayout = new javax.swing.GroupLayout(panelrugby);
+        panelrugby.setLayout(panelrugbyLayout);
+        panelrugbyLayout.setHorizontalGroup(
+            panelrugbyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
         );
-        panel3Layout.setVerticalGroup(
-            panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+        panelrugbyLayout.setVerticalGroup(
+            panelrugbyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelrugbyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab3", panel3);
+        jTabbedPaneSport.addTab("tab2", panelrugby);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
-        );
+        panelWaterpolo.setLayout(new javax.swing.BoxLayout(panelWaterpolo, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane3.setViewportView(panelWaterpolo);
 
-        jTabbedPane2.addTab("tab4", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelwaterpoloLayout = new javax.swing.GroupLayout(panelwaterpolo);
+        panelwaterpolo.setLayout(panelwaterpoloLayout);
+        panelwaterpoloLayout.setHorizontalGroup(
+            panelwaterpoloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+        panelwaterpoloLayout.setVerticalGroup(
+            panelwaterpoloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelwaterpoloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab5", jPanel4);
+        jTabbedPaneSport.addTab("tab3", panelwaterpolo);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
-        );
+        panelNetball.setLayout(new javax.swing.BoxLayout(panelNetball, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane4.setViewportView(panelNetball);
 
-        jTabbedPane2.addTab("tab6", jPanel8);
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelnetballLayout = new javax.swing.GroupLayout(panelnetball);
+        panelnetball.setLayout(panelnetballLayout);
+        panelnetballLayout.setHorizontalGroup(
+            panelnetballLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+        panelnetballLayout.setVerticalGroup(
+            panelnetballLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelnetballLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab7", jPanel9);
+        jTabbedPaneSport.addTab("tab4", panelnetball);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+        panelSquash.setLayout(new javax.swing.BoxLayout(panelSquash, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane5.setViewportView(panelSquash);
+
+        javax.swing.GroupLayout panelsquashLayout = new javax.swing.GroupLayout(panelsquash);
+        panelsquash.setLayout(panelsquashLayout);
+        panelsquashLayout.setHorizontalGroup(
+            panelsquashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+        panelsquashLayout.setVerticalGroup(
+            panelsquashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelsquashLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab8", jPanel10);
+        jTabbedPaneSport.addTab("tab5", panelsquash);
 
-        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 605, 490));
+        panelTennis.setLayout(new javax.swing.BoxLayout(panelTennis, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane6.setViewportView(panelTennis);
+
+        javax.swing.GroupLayout paneltennisLayout = new javax.swing.GroupLayout(paneltennis);
+        paneltennis.setLayout(paneltennisLayout);
+        paneltennisLayout.setHorizontalGroup(
+            paneltennisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+        );
+        paneltennisLayout.setVerticalGroup(
+            paneltennisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneltennisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneSport.addTab("tab6", paneltennis);
+
+        panelCricket.setLayout(new javax.swing.BoxLayout(panelCricket, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane7.setViewportView(panelCricket);
+
+        javax.swing.GroupLayout panelcricketLayout = new javax.swing.GroupLayout(panelcricket);
+        panelcricket.setLayout(panelcricketLayout);
+        panelcricketLayout.setHorizontalGroup(
+            panelcricketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+        );
+        panelcricketLayout.setVerticalGroup(
+            panelcricketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelcricketLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneSport.addTab("tab7", panelcricket);
+
+        panelBasketball.setLayout(new javax.swing.BoxLayout(panelBasketball, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane8.setViewportView(panelBasketball);
+
+        javax.swing.GroupLayout panelbasketballLayout = new javax.swing.GroupLayout(panelbasketball);
+        panelbasketball.setLayout(panelbasketballLayout);
+        panelbasketballLayout.setHorizontalGroup(
+            panelbasketballLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+        );
+        panelbasketballLayout.setVerticalGroup(
+            panelbasketballLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelbasketballLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneSport.addTab("tab8", panelbasketball);
+
+        getContentPane().add(jTabbedPaneSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 605, 510));
 
         panelBets.setBackground(new java.awt.Color(255, 204, 204));
 
+        lblEventBet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEventBet.setText("TA vs TB");
 
         lblSport.setText("jLabel5");
@@ -388,26 +594,18 @@ public class MainPage extends javax.swing.JFrame {
 
         jLabel5.setText("PLACE BET");
 
+        jLabel3.setText("Bet Amount:");
+
         javax.swing.GroupLayout panelBetsLayout = new javax.swing.GroupLayout(panelBets);
         panelBets.setLayout(panelBetsLayout);
         panelBetsLayout.setHorizontalGroup(
             panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBetsLayout.createSequentialGroup()
-                .addComponent(rbtnTA, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBetsLayout.createSequentialGroup()
-                        .addComponent(lblEventBet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelBetsLayout.createSequentialGroup()
-                        .addComponent(rbtnDraw, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(rbtnTB)
-                        .addGap(16, 16, 16))))
-            .addGroup(panelBetsLayout.createSequentialGroup()
                 .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBetsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
                         .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBetsLayout.createSequentialGroup()
                         .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,6 +620,18 @@ public class MainPage extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(panelBetsLayout.createSequentialGroup()
+                .addComponent(rbtnTA, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBetsLayout.createSequentialGroup()
+                        .addComponent(lblEventBet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelBetsLayout.createSequentialGroup()
+                        .addComponent(rbtnDraw, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(rbtnTB)
+                        .addGap(16, 16, 16))))
         );
         panelBetsLayout.setVerticalGroup(
             panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,10 +649,12 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(rbtnDraw)
                     .addComponent(rbtnTB))
                 .addGap(26, 26, 26)
-                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(btnConfirmBet)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelBets, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 300, 370));
@@ -451,17 +663,23 @@ public class MainPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+    private void lblHockeyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHockeyMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
         execute("hockey");
 //        jTabbedPane2.removeAll();
-        jTabbedPane2.setSelectedIndex(0);
-    }//GEN-LAST:event_jLabel3MousePressed
+        jTabbedPaneSport.setSelectedIndex(0);
+    }//GEN-LAST:event_lblHockeyMousePressed
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-       execute("rugby");
-        jTabbedPane2.setSelectedIndex(1);
+    private void lblRugbyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRugbyMousePressed
         panelBets.setVisible(false);
-    }//GEN-LAST:event_jLabel4MousePressed
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("rugby");
+//        jTabbedPane2.removeAll();
+        jTabbedPaneSport.setSelectedIndex(1);
+    }//GEN-LAST:event_lblRugbyMousePressed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         Menu m = new Menu();
@@ -479,46 +697,115 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnTAActionPerformed
 
     private void rbtnDrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDrawActionPerformed
-         if (rbtnTB.isSelected() || rbtnTA.isSelected()) {
+        if (rbtnTB.isSelected() || rbtnTA.isSelected()) {
             rbtnTB.setSelected(false);
-             rbtnTA.setSelected(false);
+            rbtnTA.setSelected(false);
         } else {
             rbtnDraw.setSelected(true);
         }
     }//GEN-LAST:event_rbtnDrawActionPerformed
 
     private void rbtnTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTBActionPerformed
-         if (rbtnDraw.isSelected() || rbtnTA.isSelected()) {
+        if (rbtnDraw.isSelected() || rbtnTA.isSelected()) {
             rbtnDraw.setSelected(false);
-             rbtnTA.setSelected(false);
+            rbtnTA.setSelected(false);
         } else {
             rbtnTB.setSelected(true);
         }
     }//GEN-LAST:event_rbtnTBActionPerformed
 
     private void btnConfirmBetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmBetActionPerformed
-       DataHandler dh = new DataHandler();
-       
-       String dateString = lblDateEvent.getText();
-       String teamSelected = "";
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-       
-       LocalDate date = LocalDate.parse(dateString,formatter);
-       Event e = dh.searchEvent(lblSport.getText(), rbtnTA.getText(), rbtnTB.getText(), date);
-       User cu = CurrentUser.getInstance().getCurrentUser();
-        if (rbtnTA.isSelected()) {
-            teamSelected = rbtnTA.getText();
-        }if (rbtnTB.isSelected()) {
-            teamSelected = rbtnTB.getText();
-        }if (rbtnDraw.isSelected()) {
-            teamSelected = rbtnDraw.getText();
-        }if (cu != null && cu.getBalance() >=  Double.parseDouble(txtAmount.getText())) {
-            dh.placeBetFinal(cu, e, Double.parseDouble(txtAmount.getText()), teamSelected);
-            JOptionPane.showMessageDialog(panelBets, "success");
+
+        DataHandler dh = new DataHandler();
+
+        String dateString = lblDateEvent.getText();
+        String teamSelected = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate date = LocalDate.parse(dateString, formatter);
+        Event e = dh.searchEvent(lblSport.getText(), rbtnTA.getText(), rbtnTB.getText(), date);
+        User cu = CurrentUser.getInstance().getCurrentUser();
+        if (dh.checkIfPreviousBetMade(cu, e) != true) {
+
+            if (rbtnTA.isSelected()) {
+                teamSelected = rbtnTA.getText();
+            }
+            if (rbtnTB.isSelected()) {
+                teamSelected = rbtnTB.getText();
+            }
+            if (rbtnDraw.isSelected()) {
+                teamSelected = rbtnDraw.getText();
+            }
+            if (cu != null && cu.getBalance() >= Double.parseDouble(txtAmount.getText())) {
+                dh.placeBetFinal(cu, e, Double.parseDouble(txtAmount.getText()), teamSelected);
+                User updatedUser = dh.searchUserID(cu.getUserid());
+            CurrentUser.getInstance().setCurrentUser(updatedUser);
+              
+                updateBalance();
+                JOptionPane.showMessageDialog(panelBets, "success");
+            } else {
+                JOptionPane.showMessageDialog(panelBets, "unsuccessful");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(panelBets, "unsuccessful");
+            JOptionPane.showMessageDialog(panelBets, "Cannot place multiple bets\n on one event");
         }
+
     }//GEN-LAST:event_btnConfirmBetActionPerformed
+
+    private void panelhockeyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelhockeyKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelhockeyKeyTyped
+
+    private void lblWaterpoloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblWaterpoloMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("waterpolo");
+//        jTabbedPane2.removeAll();
+        jTabbedPaneSport.setSelectedIndex(2);
+    }//GEN-LAST:event_lblWaterpoloMousePressed
+
+    private void lblNetballMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNetballMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("netball");
+//        jTabbedPane2.removeAll();
+        jTabbedPaneSport.setSelectedIndex(3);
+    }//GEN-LAST:event_lblNetballMousePressed
+
+    private void lblsquashMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblsquashMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("squash");
+        jTabbedPaneSport.setSelectedIndex(4);
+    }//GEN-LAST:event_lblsquashMousePressed
+
+    private void lbltennisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltennisMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("tennis");
+        jTabbedPaneSport.setSelectedIndex(5);
+    }//GEN-LAST:event_lbltennisMousePressed
+
+    private void lblcricketMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcricketMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("cricket");
+        jTabbedPaneSport.setSelectedIndex(6);
+    }//GEN-LAST:event_lblcricketMousePressed
+
+    private void lblbasketballMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbasketballMousePressed
+        panelBets.setVisible(false);
+        panelBets.repaint();
+        panelBets.revalidate();
+        execute("basketball");
+        jTabbedPaneSport.setSelectedIndex(7);
+    }//GEN-LAST:event_lblbasketballMousePressed
 
     /**
      * @param args the command line arguments
@@ -562,23 +849,46 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTabbedPane jTabbedPaneSport;
+    private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblDateEvent;
     private javax.swing.JLabel lblEventBet;
+    private javax.swing.JLabel lblHockey;
+    private javax.swing.JLabel lblNetball;
+    private javax.swing.JLabel lblRugby;
     private javax.swing.JLabel lblSport;
-    private javax.swing.JPanel panel1;
-    private javax.swing.JPanel panel2;
-    private javax.swing.JPanel panel3;
+    private javax.swing.JLabel lblWaterpolo;
+    private javax.swing.JLabel lblbasketball;
+    private javax.swing.JLabel lblcricket;
+    private javax.swing.JLabel lblsquash;
+    private javax.swing.JLabel lbltennis;
+    private javax.swing.JPanel panelBasketball;
     private javax.swing.JPanel panelBets;
+    private javax.swing.JPanel panelCricket;
+    private javax.swing.JPanel panelHock;
+    private javax.swing.JPanel panelNetball;
+    private javax.swing.JPanel panelRugby;
+    private javax.swing.JPanel panelSquash;
+    private javax.swing.JPanel panelTennis;
+    private javax.swing.JPanel panelWaterpolo;
+    private javax.swing.JPanel panelbasketball;
+    private javax.swing.JPanel panelcricket;
+    private javax.swing.JPanel panelhockey;
+    private javax.swing.JPanel panelnetball;
+    private javax.swing.JPanel panelrugby;
+    private javax.swing.JPanel panelsquash;
+    private javax.swing.JPanel paneltennis;
+    private javax.swing.JPanel panelwaterpolo;
     private javax.swing.JRadioButton rbtnDraw;
     private javax.swing.JRadioButton rbtnTA;
     private javax.swing.JRadioButton rbtnTB;

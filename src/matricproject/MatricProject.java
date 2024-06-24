@@ -21,6 +21,7 @@ public class MatricProject {
         LocalDate date = LocalDate.of(2002, 01, 01);
         LocalDate date1 = LocalDate.of(2021, 01, 01);
         Event e = new Event(1, "hockey", date1, "Chubb", "Gane");
+         Event ee = new Event(2, "hockey", date1, "Chubb", "Gane");
        User u = new User(1, "bob", "smith", "24bobs@kingswoodcollege.com", "bob123", 
                true, date, 9, "wood", 100, false);
        Betslip b = new Betslip( 1,1, 1, "Gane", 20,0.0,null);
@@ -44,7 +45,8 @@ public class MatricProject {
        // dh.placeBetFinal(u, e, 33, "Gane");
       //  dh.addOddsMethod();
     //    dh.updateBetslipRA();
-       System.out.println();
+  //  dh.updateDrawsHouseEvent(dh.searchHouseEvent("hockey", "wood"));
+    //   System.out.println(dh.checkIfPreviousBetMade(u, ee));
 //        ArrayList<User> users = dh.getAllUsers();
 //      
 //        for (int i = 0; i < users.size(); i++) {

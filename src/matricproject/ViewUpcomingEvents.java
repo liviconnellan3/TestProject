@@ -7,6 +7,7 @@ package matricproject;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -16,8 +17,10 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class ViewUpcomingEvents extends javax.swing.JFrame {
- private ArrayList<Event> events;
-  private int selected;
+
+    private ArrayList<Event> events;
+    private int selected;
+
     /**
      * Creates new form ViewEvents
      */
@@ -25,57 +28,55 @@ public class ViewUpcomingEvents extends javax.swing.JFrame {
         initComponents();
         refreshUI();
     }
-    
-     public void populateTable() {
+
+    public void populateTable() {
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
         tableModel.setRowCount(0);
         DataHandler dh = new DataHandler();
-events = dh.getAllUpcomingEvents();
+        events = dh.getAllUpcomingEvents();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (Event event : dh.getAllUpcomingEvents()) {
-            tableModel.addRow(new Object[]{event.getEventid(), event.getSport(), event.getDate().format(formatter),event.getTeamA(), event.getTeamB(),
-            dh.calculatingOddsA(event), dh.calculatingOddsB(event), dh.calculatingDraw(event)});
+            tableModel.addRow(new Object[]{event.getEventid(), event.getSport(), event.getDate().format(formatter), event.getTeamA(), event.getTeamB(),
+                dh.calculatingOddsA(event), dh.calculatingOddsB(event), dh.calculatingDraw(event)});
         }
-    
-jTable1.getSelectionModel() .addListSelectionListener(new ListSelectionListener() {
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) {
-            int selectedRow = jTable1.getSelectedRow();
-            if (selectedRow != -1) { // If a row is actually selected
-                DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
 
-                // Assuming your label is lblSelectedInfo
-                String id = tableModel.getValueAt(selectedRow, 0)+"";                
-                txteventid.setText(id);
-                
-                String s = tableModel.getValueAt(selectedRow, 1)+"";               
-                txtsport.setText(s);
-                
-                String d = tableModel.getValueAt(selectedRow, 2)+"";    
-                 LocalDate date = LocalDate.parse(d);
-                datePick.setDate(date);
-                
-                String a = tableModel.getValueAt(selectedRow, 3)+"";               
-                txtteama.setText(a);
-                
-                String b = tableModel.getValueAt(selectedRow, 4)+"";               
-                txtteamb.setText(b);
-                
-              
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = jTable1.getSelectedRow();
+                    if (selectedRow != -1) { // If a row is actually selected
+                        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+
+                        // Assuming your label is lblSelectedInfo
+//                        String id = tableModel.getValueAt(selectedRow, 0) + "";
+//                        txteventid.setText(id);
+                        String s = tableModel.getValueAt(selectedRow, 1) + "";
+                        txtsport.setText(s);
+
+                        String d = tableModel.getValueAt(selectedRow, 2) + "";
+                        LocalDate date = LocalDate.parse(d);
+                        datePick.setDate(date);
+
+                        String a = tableModel.getValueAt(selectedRow, 3) + "";
+                        txtteama.setText(a);
+
+                        String b = tableModel.getValueAt(selectedRow, 4) + "";
+                        txtteamb.setText(b);
+
+                    }
+                }
             }
-        }
+        });
+
     }
-});
 
-            }
-     
-     private void refreshUI() {
+    private void refreshUI() {
 //      jTable1.removeAll();
-      
+
         this.populateTable();
-        
+
     }
 
     /**
@@ -89,19 +90,23 @@ jTable1.getSelectionModel() .addListSelectionListener(new ListSelectionListener(
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txteventid = new javax.swing.JTextField();
         txtsport = new javax.swing.JTextField();
         datePick = new com.github.lgooddatepicker.components.DatePicker();
         txtteama = new javax.swing.JTextField();
         txtteamb = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
+        btnedit = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,83 +126,73 @@ jTable1.getSelectionModel() .addListSelectionListener(new ListSelectionListener(
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("Event ID");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 710, 300));
 
-        jLabel2.setText("Sport");
+        txtsport.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        getContentPane().add(txtsport, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 100, 25));
+        getContentPane().add(datePick, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 130, 20));
+
+        txtteama.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        getContentPane().add(txtteama, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, 100, 25));
+
+        txtteamb.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        getContentPane().add(txtteamb, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, 100, 25));
 
         jLabel3.setText("Team A");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 70, 20));
 
         jLabel4.setText("Team B");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 80, 20));
 
         jLabel5.setText("Date");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 40, -1));
 
         jButton1.setText("Back");
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(852, 521, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                .addComponent(datePick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtteamb, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtteama, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txteventid)
-                                    .addComponent(txtsport, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txteventid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtsport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtteama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtteamb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(datePick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
+        btndelete.setText("Delete");
+        btndelete.setBackground(new java.awt.Color(255, 255, 254));
+        btndelete.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 470, 80, -1));
+
+        btnedit.setText("Edit");
+        btnedit.setBackground(new java.awt.Color(255, 255, 254));
+        btnedit.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 80, -1));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 60)); // NOI18N
+        jLabel7.setText("Upcoming Events");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 480, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel6.setText("Sport");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 100, -1));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setOpaque(true);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 750, 460));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/sport.jpg"))); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 0, 980, 550));
 
         setSize(new java.awt.Dimension(946, 558));
         setLocationRelativeTo(null);
@@ -209,33 +204,89 @@ jTable1.getSelectionModel() .addListSelectionListener(new ListSelectionListener(
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-       int eventid = Integer.parseInt(txteventid.getText());
-       String sport = txtsport.getText();
-       LocalDate date = datePick.getDate();
-        String a = txtteama.getText();
-         String b = txtteamb.getText();
-         Event e = new Event(eventid, sport, date, a, b);
-         DataHandler dh = new DataHandler();
-         dh.updateEvent(e, eventid);
-         refreshUI();
-    }//GEN-LAST:event_btneditActionPerformed
-
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
-       DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
         DataHandler dh = new DataHandler();
         int selectedRow = jTable1.getSelectedRow();
-         int eventID = (int)tableModel.getValueAt(selectedRow, 0);
-        String sport = ""+ tableModel.getValueAt(selectedRow, 1);
-         String  date1 = tableModel.getValueAt(selectedRow, 2)+ "";
-       LocalDate date = LocalDate.parse(date1);
-        String TA = ""+ tableModel.getValueAt(selectedRow, 3);
-         String TB = ""+ tableModel.getValueAt(selectedRow, 4);
-         Event ee = new Event(eventID, sport, date, TA, TB);
-         
-         dh.deleteEvent(ee);
+         if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Must select an event", "Connot delete event", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+        
+        int eventID = (int) tableModel.getValueAt(selectedRow, 0);
+        String sport = "" + tableModel.getValueAt(selectedRow, 1);
+        String date1 = tableModel.getValueAt(selectedRow, 2) + "";
+        LocalDate date = LocalDate.parse(date1);
+        String TA = "" + tableModel.getValueAt(selectedRow, 3);
+        String TB = "" + tableModel.getValueAt(selectedRow, 4);
+        Event ee = new Event(eventID, sport, date, TA, TB);
+
+        dh.deleteEvent(ee);
         refreshUI();
+         }
+
+//      
     }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        DataHandler dh = new DataHandler();
+        int selectedRow = jTable1.getSelectedRow();
+
+        String error = "";
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Must select an event", "Connot update event", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int eventID = (int) tableModel.getValueAt(selectedRow, 0);
+            String sportt = "" + tableModel.getValueAt(selectedRow, 1);
+            String date1 = tableModel.getValueAt(selectedRow, 2) + "";
+            LocalDate datee = LocalDate.parse(date1);
+            String TA = "" + tableModel.getValueAt(selectedRow, 3);
+            String TB = "" + tableModel.getValueAt(selectedRow, 4);
+            Event ee = new Event(eventID, sportt, datee, TA, TB);
+
+            if (txtsport.getText().equalsIgnoreCase(sportt)
+                    && txtteama.getText().equalsIgnoreCase(TA)
+                    && txtteamb.getText().equalsIgnoreCase(TB)
+                    && datePick.getDate().equals(datee)) {
+                JOptionPane.showMessageDialog(this, "No change made", "Connot update event", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                if (txtteama.getText().equalsIgnoreCase(txtteamb.getText())) {
+                    error += "Must select two different teams" + "\n";
+                }
+                if (datePick.getDate().isBefore(LocalDate.now())) {
+                    error += "Date must be in the future" + "\n";
+                }
+                if (dh.checkSportInput(txtsport.getText()) == false) {
+                    error +=  "Incorrect sport entered" + "\n";
+                }
+                if (dh.checkTeamInput(txtteama.getText()) == false ||dh.checkTeamInput(txtteamb.getText()) == false  ) {
+                    error += "Incorrect team entered" + "\n";
+                }
+
+                if (error.isBlank() == false) {
+                    JOptionPane.showMessageDialog(this, error, "Connot update event", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+
+                    String sport = txtsport.getText();
+                    LocalDate date = datePick.getDate();
+                    String a = txtteama.getText();
+                    String b = txtteamb.getText();
+                    Event e = new Event(eventID, sport, date, a, b);
+
+                    dh.updateEvent(e, eventID);
+                    refreshUI();
+                }
+
+            }
+
+        }
+
+
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,16 +331,19 @@ jTable1.getSelectionModel() .addListSelectionListener(new ListSelectionListener(
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btndelete;
+    private javax.swing.JButton btnedit;
     private com.github.lgooddatepicker.components.DatePicker datePick;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txteventid;
     private javax.swing.JTextField txtsport;
     private javax.swing.JTextField txtteama;
     private javax.swing.JTextField txtteamb;
