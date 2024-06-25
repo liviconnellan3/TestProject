@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class AddEvent extends javax.swing.JFrame {
-private DataHandler dh;
+
+    private DataHandler dh;
+
     /**
      * Creates new form AddEvent
      */
@@ -121,34 +123,51 @@ private DataHandler dh;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      DataHandler dh = new DataHandler();
-      String error = "";
+        DataHandler dh = new DataHandler();
+        String error = "";
         if (comboTeamA.getSelectedItem() == comboTeamB.getSelectedItem()) {
-            error += "Must select two different teams"+"\n";        
+            error += "Must select two different teams" + "\n";
         }
         if (datePicker.getDate() == null) {
-            error += "Must select date"+"\n";        
-        }else{
-         if (datePicker.getDate().isBefore(LocalDate.now())) {
-            error += "Date must be in the future"+"\n";        
-        }}
-         
-         if (error.isBlank() == false) {
-             JOptionPane.showMessageDialog(this, error, "Connot add new event", JOptionPane.ERROR_MESSAGE);
+            error += "Must select date" + "\n";
+        } else {
+            if (datePicker.getDate().isBefore(LocalDate.now())) {
+                error += "Date must be in the future" + "\n";
+            }
+        }
 
-        }else{
+        if (error.isBlank() == false) {
+            JOptionPane.showMessageDialog(this, error, "Connot add new event", JOptionPane.ERROR_MESSAGE);
+
+        } else {
             String sport = comboSport.getSelectedItem() + "";
-        String date1 = datePicker.getDateStringOrEmptyString();
-        LocalDate date = LocalDate.parse(date1);
-        String teamA = comboTeamA.getSelectedItem() + "";
-        String teamB = comboTeamB.getSelectedItem() + "";
-       
-        Event e = new Event(sport, date, teamA, teamB);
-        
-        dh.insertEvent(e);
-        JOptionPane.showMessageDialog(AddEvent.this, "New event has been sucessfully added");
-       
-               
+            String date1 = datePicker.getDateStringOrEmptyString();
+            LocalDate date = LocalDate.parse(date1);
+            String teamA = comboTeamA.getSelectedItem() + "";
+            String teamB = comboTeamB.getSelectedItem() + "";
+
+            Event e = new Event(sport, date, teamA, teamB);
+            
+            if (dh.eventPresent(sport, teamA, teamB, date)) {
+                JOptionPane.showMessageDialog(this, teamA + " is already playing " + teamB + "\nin " + sport + "\n"
+                        + " on " + date, "Connot add new event", JOptionPane.ERROR_MESSAGE);
+
+            }else{
+            if (dh.eventPresent(sport, teamB, teamA, date)) {
+                JOptionPane.showMessageDialog(this, teamA + " is already playing " + teamB + "\nin " + sport + "\n"
+                        + " on " + date, "Connot add new event", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                
+                
+                dh.insertEvent(e);
+
+                JOptionPane.showMessageDialog(AddEvent.this, "New event has been sucessfully added");
+
+            }
+            }
+            
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

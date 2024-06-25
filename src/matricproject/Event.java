@@ -50,6 +50,18 @@ public class Event {
         this.teamB = teamB;
     }
 
+    public Event(int eventid, String sport, LocalDate date, String teamA, String teamB, double oddsA, double oddsB, double oddsDraw) {
+        this.eventid = eventid;
+        this.sport = sport;
+        this.date = date;
+        this.teamA = teamA;
+        this.teamB = teamB;
+        this.oddsA = oddsA;
+        this.oddsB = oddsB;
+        this.oddsDraw = oddsDraw;
+    }
+    
+
     public int getEventid() {
         return eventid;
     }

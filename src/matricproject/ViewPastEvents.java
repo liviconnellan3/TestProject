@@ -33,8 +33,9 @@ public class ViewPastEvents extends javax.swing.JFrame {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (Event event : dh.getAllPastEvents()) {
+          
             tableModel.addRow(new Object[]{event.getEventid(), event.getSport(), event.getDate().format(formatter), event.getTeamA(), event.getTeamB(),
-                dh.calculatingOddsA(event), dh.calculatingOddsB(event), dh.calculatingDraw(event), dh.getWinnerEvent(event.getEventid())});
+                event.getOddsA(), event.getOddsB(), event.getOddsDraw(), dh.getWinnerEvent(event.getEventid())});
         }
 
 //code from ChatGPT
@@ -200,7 +201,7 @@ public class ViewPastEvents extends javax.swing.JFrame {
             } else {
                 if (rbtnTeamA.isSelected()) {
                     dh.updateBetslips(ee, TA);
-                    dh.updateAllBalances(ee, TA);
+                   dh.updateAllBalances(ee, TA);
                     dh.updateWinsLossesDraws(ee, TA);
 
                 }

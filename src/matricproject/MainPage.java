@@ -21,12 +21,12 @@ public class MainPage extends javax.swing.JFrame {
      * Creates new form MainPage
      */
     public MainPage() {
-        
+
         initComponents();
         panelBets.setVisible(false);
         updateBalance();
     }
-    
+
     private ArrayList<Event> eventss = new ArrayList<>();
 
     public void execute(String sport) {
@@ -49,7 +49,7 @@ public class MainPage extends javax.swing.JFrame {
 
     public void updateBalance() {
         User cu = CurrentUser.getInstance().getCurrentUser();
-        lblBalance.setText("" + cu.getBalance());
+        lblBalance.setText("" +  (Math.round(cu.getBalance()* 100.0) / 100.0) );
         lblBalance.repaint();
 
     }
@@ -213,6 +213,14 @@ public class MainPage extends javax.swing.JFrame {
         lbltennis = new javax.swing.JLabel();
         lblcricket = new javax.swing.JLabel();
         lblbasketball = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jTabbedPaneSport = new javax.swing.JTabbedPane();
         panelHock = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -258,21 +266,21 @@ public class MainPage extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 204, 204));
         jPanel7.setPreferredSize(new java.awt.Dimension(930, 50));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/menu.png"))); // NOI18N
         jLabel1.setText("MENU");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel1MousePressed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Balance:");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        lblBalance.setText(".");
         lblBalance.setBackground(new java.awt.Color(255, 255, 255));
         lblBalance.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblBalance.setText(".");
         lblBalance.setOpaque(true);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -300,14 +308,16 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(930, 45));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblHockey.setBackground(new java.awt.Color(255, 255, 255));
         lblHockey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconHockey.png"))); // NOI18N
+        lblHockey.setBackground(new java.awt.Color(255, 255, 255));
         lblHockey.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblHockeyMousePressed(evt);
             }
         });
+        jPanel5.add(lblHockey, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 36, 36));
 
         lblRugby.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconRugby.png"))); // NOI18N
         lblRugby.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -315,6 +325,7 @@ public class MainPage extends javax.swing.JFrame {
                 lblRugbyMousePressed(evt);
             }
         });
+        jPanel5.add(lblRugby, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 0, -1, -1));
 
         lblWaterpolo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconWaterPolo.png"))); // NOI18N
         lblWaterpolo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -322,6 +333,7 @@ public class MainPage extends javax.swing.JFrame {
                 lblWaterpoloMousePressed(evt);
             }
         });
+        jPanel5.add(lblWaterpolo, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 0, -1, -1));
 
         lblNetball.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-netball-36.png"))); // NOI18N
         lblNetball.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -329,6 +341,7 @@ public class MainPage extends javax.swing.JFrame {
                 lblNetballMousePressed(evt);
             }
         });
+        jPanel5.add(lblNetball, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 0, -1, -1));
 
         lblsquash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-squash-36.png"))); // NOI18N
         lblsquash.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -336,6 +349,7 @@ public class MainPage extends javax.swing.JFrame {
                 lblsquashMousePressed(evt);
             }
         });
+        jPanel5.add(lblsquash, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 0, -1, -1));
 
         lbltennis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-tennis-36.png"))); // NOI18N
         lbltennis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -343,6 +357,7 @@ public class MainPage extends javax.swing.JFrame {
                 lbltennisMousePressed(evt);
             }
         });
+        jPanel5.add(lbltennis, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
 
         lblcricket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-cricket-36.png"))); // NOI18N
         lblcricket.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,6 +365,7 @@ public class MainPage extends javax.swing.JFrame {
                 lblcricketMousePressed(evt);
             }
         });
+        jPanel5.add(lblcricket, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 0, -1, -1));
 
         lblbasketball.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/icons8-basketball-36 (2).png"))); // NOI18N
         lblbasketball.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -357,47 +373,50 @@ public class MainPage extends javax.swing.JFrame {
                 lblbasketballMousePressed(evt);
             }
         });
+        jPanel5.add(lblbasketball, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 0, -1, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblHockey)
-                .addGap(18, 18, 18)
-                .addComponent(lblRugby)
-                .addGap(18, 18, 18)
-                .addComponent(lblWaterpolo)
-                .addGap(18, 18, 18)
-                .addComponent(lblNetball)
-                .addGap(18, 18, 18)
-                .addComponent(lblsquash)
-                .addGap(18, 18, 18)
-                .addComponent(lbltennis)
-                .addGap(18, 18, 18)
-                .addComponent(lblcricket)
-                .addGap(18, 18, 18)
-                .addComponent(lblbasketball)
-                .addContainerGap(510, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblHockey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblRugby, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblWaterpolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNetball, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblsquash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbltennis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblcricket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblbasketball, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel10.setText("Rugby");
+        jLabel10.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel10AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 34, 60, 15));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 930, 45));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel11.setText("Waterpolo");
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 34, 60, 15));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel12.setText("Basketball");
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 34, 60, 15));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel13.setText("Hockey");
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 34, 60, 15));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel14.setText("Netball");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 34, 60, 15));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel15.setText("Squash");
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 34, 60, 15));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel16.setText("Tennis");
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 34, 60, 15));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel17.setText("Cricket");
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 34, 60, 15));
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 930, 50));
 
         jTabbedPaneSport.setPreferredSize(new java.awt.Dimension(605, 459));
 
@@ -419,7 +438,7 @@ public class MainPage extends javax.swing.JFrame {
             panelHockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHockLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -439,7 +458,7 @@ public class MainPage extends javax.swing.JFrame {
             panelrugbyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelrugbyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab2", panelrugby);
@@ -457,7 +476,7 @@ public class MainPage extends javax.swing.JFrame {
             panelwaterpoloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelwaterpoloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab3", panelwaterpolo);
@@ -475,7 +494,7 @@ public class MainPage extends javax.swing.JFrame {
             panelnetballLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelnetballLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab4", panelnetball);
@@ -493,7 +512,7 @@ public class MainPage extends javax.swing.JFrame {
             panelsquashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelsquashLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab5", panelsquash);
@@ -511,7 +530,7 @@ public class MainPage extends javax.swing.JFrame {
             paneltennisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneltennisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab6", paneltennis);
@@ -529,7 +548,7 @@ public class MainPage extends javax.swing.JFrame {
             panelcricketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelcricketLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab7", panelcricket);
@@ -547,17 +566,17 @@ public class MainPage extends javax.swing.JFrame {
             panelbasketballLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelbasketballLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
         );
 
         jTabbedPaneSport.addTab("tab8", panelbasketball);
 
-        getContentPane().add(jTabbedPaneSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 605, 510));
+        getContentPane().add(jTabbedPaneSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 605, 500));
 
         panelBets.setBackground(new java.awt.Color(255, 204, 204));
 
-        lblEventBet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEventBet.setText("TA vs TB");
+        lblEventBet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblSport.setText("jLabel5");
 
@@ -584,8 +603,8 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmBet.setBackground(new java.awt.Color(153, 255, 153));
         btnConfirmBet.setText("CONFIRM BET");
+        btnConfirmBet.setBackground(new java.awt.Color(153, 255, 153));
         btnConfirmBet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmBetActionPerformed(evt);
@@ -664,6 +683,7 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblHockeyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHockeyMousePressed
+        txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
@@ -673,9 +693,11 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lblHockeyMousePressed
 
     private void lblRugbyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRugbyMousePressed
+        txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
+        
         execute("rugby");
 //        jTabbedPane2.removeAll();
         jTabbedPaneSport.setSelectedIndex(1);
@@ -725,31 +747,51 @@ public class MainPage extends javax.swing.JFrame {
         LocalDate date = LocalDate.parse(dateString, formatter);
         Event e = dh.searchEvent(lblSport.getText(), rbtnTA.getText(), rbtnTB.getText(), date);
         User cu = CurrentUser.getInstance().getCurrentUser();
-        if (dh.checkIfPreviousBetMade(cu, e) != true) {
+        String input = txtAmount.getText() + "";
 
-            if (rbtnTA.isSelected()) {
-                teamSelected = rbtnTA.getText();
-            }
-            if (rbtnTB.isSelected()) {
-                teamSelected = rbtnTB.getText();
-            }
-            if (rbtnDraw.isSelected()) {
-                teamSelected = rbtnDraw.getText();
-            }
-            if (cu != null && cu.getBalance() >= Double.parseDouble(txtAmount.getText())) {
-                dh.placeBetFinal(cu, e, Double.parseDouble(txtAmount.getText()), teamSelected);
-                User updatedUser = dh.searchUserID(cu.getUserid());
-            CurrentUser.getInstance().setCurrentUser(updatedUser);
-              
-                updateBalance();
-                JOptionPane.showMessageDialog(panelBets, "success");
+// code from previous validation task
+        boolean check = true;
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) {
+                check = true;
             } else {
-                JOptionPane.showMessageDialog(panelBets, "unsuccessful");
+                check = false;
             }
+        }
+
+        if (check == false) {
+            JOptionPane.showMessageDialog(panelBets, "Bet ammount can only be numbers", "Connot place bet", JOptionPane.ERROR_MESSAGE);
+
 
         } else {
-            JOptionPane.showMessageDialog(panelBets, "Cannot place multiple bets\n on one event");
+            if (dh.checkIfPreviousBetMade(cu, e) != true) {
+
+                if (rbtnTA.isSelected()) {
+                    teamSelected = rbtnTA.getText();
+                }
+                if (rbtnTB.isSelected()) {
+                    teamSelected = rbtnTB.getText();
+                }
+                if (rbtnDraw.isSelected()) {
+                    teamSelected = rbtnDraw.getText();
+                }
+                if (cu != null && cu.getBalance() >= Double.parseDouble(txtAmount.getText())) {
+                    dh.placeBetFinal(cu, e, Double.parseDouble(txtAmount.getText()), teamSelected);
+                    User updatedUser = dh.searchUserID(cu.getUserid());
+                    CurrentUser.getInstance().setCurrentUser(updatedUser);
+
+                    updateBalance();
+                    JOptionPane.showMessageDialog(panelBets, "success");
+                    txtAmount.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(panelBets, "unsuccessful");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(panelBets, "Cannot place multiple bets\n on one event");
+            }
         }
+
 
     }//GEN-LAST:event_btnConfirmBetActionPerformed
 
@@ -758,6 +800,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_panelhockeyKeyTyped
 
     private void lblWaterpoloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblWaterpoloMousePressed
+        txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
@@ -770,12 +813,14 @@ public class MainPage extends javax.swing.JFrame {
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
+        txtAmount.setText("");
         execute("netball");
 //        jTabbedPane2.removeAll();
         jTabbedPaneSport.setSelectedIndex(3);
     }//GEN-LAST:event_lblNetballMousePressed
 
     private void lblsquashMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblsquashMousePressed
+        txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
@@ -784,6 +829,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lblsquashMousePressed
 
     private void lbltennisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltennisMousePressed
+        txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
@@ -792,6 +838,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lbltennisMousePressed
 
     private void lblcricketMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcricketMousePressed
+        txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
@@ -800,12 +847,17 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lblcricketMousePressed
 
     private void lblbasketballMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbasketballMousePressed
+       txtAmount.setText("");
         panelBets.setVisible(false);
         panelBets.repaint();
         panelBets.revalidate();
         execute("basketball");
         jTabbedPaneSport.setSelectedIndex(7);
     }//GEN-LAST:event_lblbasketballMousePressed
+
+    private void jLabel10AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel10AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10AncestorAdded
 
     /**
      * @param args the command line arguments
@@ -821,16 +873,24 @@ public class MainPage extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -845,6 +905,14 @@ public class MainPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmBet;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -208,22 +208,29 @@ public class ViewUpcomingEvents extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
         DataHandler dh = new DataHandler();
         int selectedRow = jTable1.getSelectedRow();
-         if (selectedRow == -1) {
+        if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Must select an event", "Connot delete event", JOptionPane.ERROR_MESSAGE);
 
         } else {
-        
-        int eventID = (int) tableModel.getValueAt(selectedRow, 0);
-        String sport = "" + tableModel.getValueAt(selectedRow, 1);
-        String date1 = tableModel.getValueAt(selectedRow, 2) + "";
-        LocalDate date = LocalDate.parse(date1);
-        String TA = "" + tableModel.getValueAt(selectedRow, 3);
-        String TB = "" + tableModel.getValueAt(selectedRow, 4);
-        Event ee = new Event(eventID, sport, date, TA, TB);
 
-        dh.deleteEvent(ee);
-        refreshUI();
-         }
+            int eventID = (int) tableModel.getValueAt(selectedRow, 0);
+            String sport = "" + tableModel.getValueAt(selectedRow, 1);
+            String date1 = tableModel.getValueAt(selectedRow, 2) + "";
+            LocalDate date = LocalDate.parse(date1);
+            String TA = "" + tableModel.getValueAt(selectedRow, 3);
+            String TB = "" + tableModel.getValueAt(selectedRow, 4);
+            Event ee = new Event(eventID, sport, date, TA, TB);
+
+            if (dh.getAllBetsForEvent(ee).isEmpty() == false) {
+                JOptionPane.showMessageDialog(this, "Connot delete event\n"
+                        + "as bets have already been made", "Cannot delete event", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                dh.deleteEvent(ee);
+                refreshUI();
+            }
+
+        }
 
 //      
     }//GEN-LAST:event_btndeleteActionPerformed
@@ -260,16 +267,20 @@ public class ViewUpcomingEvents extends javax.swing.JFrame {
                     error += "Date must be in the future" + "\n";
                 }
                 if (dh.checkSportInput(txtsport.getText()) == false) {
-                    error +=  "Incorrect sport entered" + "\n";
+                    error += "Incorrect sport entered" + "\n";
                 }
-                if (dh.checkTeamInput(txtteama.getText()) == false ||dh.checkTeamInput(txtteamb.getText()) == false  ) {
+                if (dh.checkTeamInput(txtteama.getText()) == false || dh.checkTeamInput(txtteamb.getText()) == false) {
                     error += "Incorrect team entered" + "\n";
                 }
 
                 if (error.isBlank() == false) {
                     JOptionPane.showMessageDialog(this, error, "Connot update event", JOptionPane.ERROR_MESSAGE);
 
-                } else {
+                } if (dh.getAllBetsForEvent(ee).isEmpty() == false) {
+                JOptionPane.showMessageDialog(this, "Connot delete event\n"
+                        + "as bets have already been made", "Cannot delete event", JOptionPane.ERROR_MESSAGE);
+
+            }else {
 
                     String sport = txtsport.getText();
                     LocalDate date = datePick.getDate();
@@ -277,7 +288,7 @@ public class ViewUpcomingEvents extends javax.swing.JFrame {
                     String b = txtteamb.getText();
                     Event e = new Event(eventID, sport, date, a, b);
 
-                    dh.updateEvent(e, eventID);
+                    dh.updateEvent(e);
                     refreshUI();
                 }
 

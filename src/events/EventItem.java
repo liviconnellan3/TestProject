@@ -45,9 +45,9 @@ public class EventItem extends javax.swing.JPanel {
         lblDate.setText(e.getDate() + "");
         lblTeamA.setText(e.getTeamA());
         lblTeamB.setText(e.getTeamB());
-        e.setOddsA(dh.calculatingOddsA(e));
-        e.setOddsB(dh.calculatingOddsB(e));
-        e.setOddsDraw(dh.calculatingDraw(e));
+//        e.setOddsA(dh.calculatingOddsA(e));
+//        e.setOddsB(dh.calculatingOddsB(e));
+//        e.setOddsDraw(dh.calculatingDraw(e));
         lblOddsA.setText(e.getOddsA() + "");
         lblOddsB.setText(e.getOddsB() + "");
         lblSport.setText(e.getSport());
@@ -156,7 +156,7 @@ public class EventItem extends javax.swing.JPanel {
         lblDraw = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize(new java.awt.Dimension(925, 85));
+        setPreferredSize(new java.awt.Dimension(590, 85));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
@@ -294,7 +294,7 @@ public class EventItem extends javax.swing.JPanel {
                 .addComponent(drawPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(teamBpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
