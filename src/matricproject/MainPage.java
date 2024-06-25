@@ -257,31 +257,35 @@ public class MainPage extends javax.swing.JFrame {
         btnConfirmBet = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 254));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel7.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
         jPanel7.setPreferredSize(new java.awt.Dimension(930, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/menu.png"))); // NOI18N
-        jLabel1.setText("MENU");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matricproject/iconMenu.png"))); // NOI18N
+        jLabel1.setText("MENU");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel1MousePressed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Balance:");
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblBalance.setText(".");
         lblBalance.setBackground(new java.awt.Color(255, 255, 255));
-        lblBalance.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblBalance.setOpaque(true);
+        lblBalance.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblBalance.setForeground(new java.awt.Color(255, 255, 255));
+        lblBalance.setText("2");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -290,18 +294,22 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 517, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addComponent(lblBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 4, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(3, 3, 3))
         );
 
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
@@ -418,8 +426,15 @@ public class MainPage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 930, 50));
 
+        jTabbedPaneSport.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPaneSport.setPreferredSize(new java.awt.Dimension(605, 459));
 
+        panelHock.setBackground(java.awt.Color.white);
+
+        jScrollPane2.setBackground(java.awt.Color.white);
+
+        panelhockey.setBackground(java.awt.Color.white);
+        panelhockey.setAlignmentY(10.0F);
         panelhockey.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 panelhockeyKeyTyped(evt);
@@ -444,7 +459,13 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab1", panelHock);
 
+        panelrugby.setBackground(java.awt.Color.white);
+
+        jScrollPane1.setBackground(java.awt.Color.white);
+
+        panelRugby.setBackground(java.awt.Color.white);
         panelRugby.setAlignmentX(0.0F);
+        panelRugby.setAlignmentY(5.0F);
         panelRugby.setLayout(new javax.swing.BoxLayout(panelRugby, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(panelRugby);
 
@@ -463,6 +484,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab2", panelrugby);
 
+        panelwaterpolo.setBackground(java.awt.Color.white);
+
+        jScrollPane3.setBackground(java.awt.Color.white);
+
+        panelWaterpolo.setBackground(new java.awt.Color(255, 255, 255));
         panelWaterpolo.setLayout(new javax.swing.BoxLayout(panelWaterpolo, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane3.setViewportView(panelWaterpolo);
 
@@ -481,6 +507,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab3", panelwaterpolo);
 
+        panelnetball.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelNetball.setBackground(new java.awt.Color(255, 255, 255));
         panelNetball.setLayout(new javax.swing.BoxLayout(panelNetball, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane4.setViewportView(panelNetball);
 
@@ -499,6 +530,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab4", panelnetball);
 
+        panelsquash.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane5.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelSquash.setBackground(new java.awt.Color(255, 255, 255));
         panelSquash.setLayout(new javax.swing.BoxLayout(panelSquash, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane5.setViewportView(panelSquash);
 
@@ -517,6 +553,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab5", panelsquash);
 
+        paneltennis.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane6.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelTennis.setBackground(new java.awt.Color(255, 255, 255));
         panelTennis.setLayout(new javax.swing.BoxLayout(panelTennis, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane6.setViewportView(panelTennis);
 
@@ -535,6 +576,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab6", paneltennis);
 
+        panelcricket.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane7.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelCricket.setBackground(new java.awt.Color(255, 255, 255));
         panelCricket.setLayout(new javax.swing.BoxLayout(panelCricket, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane7.setViewportView(panelCricket);
 
@@ -553,6 +599,11 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPaneSport.addTab("tab7", panelcricket);
 
+        panelbasketball.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane8.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelBasketball.setBackground(new java.awt.Color(255, 255, 255));
         panelBasketball.setLayout(new javax.swing.BoxLayout(panelBasketball, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane8.setViewportView(panelBasketball);
 
@@ -573,15 +624,16 @@ public class MainPage extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPaneSport, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 605, 500));
 
-        panelBets.setBackground(new java.awt.Color(255, 204, 204));
+        panelBets.setBackground(new java.awt.Color(228, 233, 251));
 
+        lblEventBet.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblEventBet.setText("TA vs TB");
-        lblEventBet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblSport.setText("jLabel5");
 
         lblDateEvent.setText("jLabel5");
 
+        rbtnTA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbtnTA.setText("jRadioButton1");
         rbtnTA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -589,6 +641,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        rbtnDraw.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbtnDraw.setText("Draw");
         rbtnDraw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,6 +649,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        rbtnTB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rbtnTB.setText("jRadioButton1");
         rbtnTB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -603,16 +657,21 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmBet.setText("CONFIRM BET");
         btnConfirmBet.setBackground(new java.awt.Color(153, 255, 153));
+        btnConfirmBet.setText("CONFIRM BET");
         btnConfirmBet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmBetActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("PLACE BET");
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Betslip");
+        jLabel5.setOpaque(true);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Bet Amount:");
 
         javax.swing.GroupLayout panelBetsLayout = new javax.swing.GroupLayout(panelBets);
@@ -621,48 +680,49 @@ public class MainPage extends javax.swing.JFrame {
             panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBetsLayout.createSequentialGroup()
                 .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBetsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBetsLayout.createSequentialGroup()
-                        .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelBetsLayout.createSequentialGroup()
-                                .addGap(118, 118, 118)
-                                .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDateEvent)
-                                    .addComponent(lblSport)))
-                            .addGroup(panelBetsLayout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(btnConfirmBet, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(118, 118, 118)
+                        .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblDateEvent, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                            .addComponent(lblSport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBetsLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnConfirmBet, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBetsLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(panelBetsLayout.createSequentialGroup()
-                .addComponent(rbtnTA, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBetsLayout.createSequentialGroup()
-                        .addComponent(lblEventBet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(97, 97, 97)
+                        .addComponent(lblEventBet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBetsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(rbtnTA, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbtnDraw, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(rbtnTB)
-                        .addGap(16, 16, 16))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtnTB)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBetsLayout.setVerticalGroup(
             panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBetsLayout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblEventBet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDateEvent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtnTA)
                     .addComponent(rbtnDraw)
@@ -670,13 +730,17 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(panelBetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnConfirmBet)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelBets, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 300, 370));
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setOpaque(true);
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 330, 460));
 
         setSize(new java.awt.Dimension(946, 558));
         setLocationRelativeTo(null);
@@ -917,6 +981,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;

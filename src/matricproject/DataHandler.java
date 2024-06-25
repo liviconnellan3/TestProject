@@ -189,7 +189,7 @@ public class DataHandler {
     public ArrayList<Event> getAllEventsSportSpecified(String inSport) {
         ArrayList<Event> events = new ArrayList();
         try {
-            String sql = "SELECT * FROM usersdb.tblevents WHERE sport = \"" + inSport + "\";";  // AND date = DATE(NOW())
+            String sql = "SELECT * FROM usersdb.tblevents WHERE sport = \"" + inSport + "\" AND date = curdate();"; //\" AND date = curdate()
             Connect conn = new Connect();
 
             ResultSet rs = conn.query(sql); //like scanner

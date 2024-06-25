@@ -155,6 +155,7 @@ public class EventItem extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblDraw = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(590, 85));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -318,87 +319,23 @@ public class EventItem extends javax.swing.JPanel {
 
         getAccessibleContext().setAccessibleParent(this);
     }// </editor-fold>//GEN-END:initComponents
-private boolean showing = false;
+
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-//        panelCheck.setVisible(false);
-//        panelCheck.setEnabled(true);
-//        rbtn1.setEnabled(true);
-//        rbtn1.setFocusable(true);
-//
-//        getParent().repaint();
-//        getParent().revalidate();
+
     }//GEN-LAST:event_formMousePressed
 
     private void teamApanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teamApanelMousePressed
-//        panelCheck.setVisible(false);
-//        panelCheck.setEnabled(true);
-//        rbtn1.setEnabled(true);
-//        rbtn1.setFocusable(true);
-//        lblBet.setText("Place bet on " + lblTeamA.getText());
-//        panelCheck.setVisible(true);
-//        getParent().repaint();
-//        getParent().revalidate();
 
     }//GEN-LAST:event_teamApanelMousePressed
 
     private void drawPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawPanelMousePressed
-//        panelCheck.setVisible(false);
-//        panelCheck.setEnabled(true);
-//        rbtn1.setEnabled(true);
-//        rbtn1.setFocusable(true);
-//        lblBet.setText("Place bet on Draw");
-//        panelCheck.setVisible(true);
-//        getParent().repaint();
-//        getParent().revalidate();
+
     }//GEN-LAST:event_drawPanelMousePressed
 
     private void teamBpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teamBpanelMousePressed
-//        lblBet.setText("Place bet on " + lblTeamB.getText());
-//        panelCheck.setVisible(true);
-//        panelCheck.setVisible(false);
-//        panelCheck.setEnabled(true);
-//        rbtn1.setEnabled(true);
-//        rbtn1.setFocusable(true);
-//        getParent().repaint();
-//        getParent().revalidate();
+//  
     }//GEN-LAST:event_teamBpanelMousePressed
 
-//    private void showMenu() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < event.size(); i++) {
-//                    sleep();
-//                    event.get(i).setVisible(true);
-//                }
-////                showing = true;
-////                getParent().repaint();
-////                getParent().revalidate();
-//            }
-//        }).start();
-//    }
-//
-//    private void hideMenu() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < event.size(); i++) {
-//                    sleep();
-//                    event.get(i).setVisible(true);
-//                }
-////                showing = true;
-////                getParent().repaint();
-////                getParent().revalidate();
-//            }
-//        }).start();
-//    }
-//
-//    private void sleep() {
-//        try {
-//            Thread.sleep(20);
-//        } catch (Exception e) {
-//        }
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel drawPanel;
